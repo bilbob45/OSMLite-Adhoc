@@ -36,12 +36,6 @@
             $("#txtMinimumLimitsAccepted").inputFilter(function (value) {
                 return /^\d*$/.test(value);
             });
-            $("#txtMaximumLimitsAccepted").inputFilter(function (value) {
-                return /^\d*$/.test(value);
-            });
-            $("#txtPenaltyPerUnit").inputFilter(function (value) {
-                return /^\d*$/.test(value);
-            });
             $("#txtFailedPenaltyValue").inputFilter(function (value) {
                 return /^\d*$/.test(value);
             });
@@ -49,19 +43,13 @@
 
         //Select 2 initializer
         $(document).ready(function (e) {
-            $('#cmbPenaltyType').select2();
-            $('#cmbRiType').select2();
-            $('#cmbPenaltyFrequency').select2();
-            $('#cmbFrequency').select2();
-            $('#cmbWorkCollection').select2();
+            $('#cmbRequiredDigit').select2();
+            $('#cmbAlphaNumRequired').select2();
+            $('#cmbUppercaseRequired').select2();
         });
 
         function openModalPwPolicy() {
             $('#exampleModalCenter').modal('show');
-            $('#divAlertInPopup').attr('class', 'alert alert-info alert-dismissible');
-            $('#divAlertInPopup').css('display', 'flex');
-            $('#<%=lblErrorMsgInPopup.ClientID%>').html('Return submission penalty type must be added to a work collection');
-             //alert alert-info alert-dismissible
          }
     </script>
     <style type="text/css" lang="en">
@@ -169,10 +157,10 @@
                                 </asp:DropDownList>
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="cmbRequiredDigit">Uppercase Required
+                                <label for="cmbUppercaseRequired">Uppercase Required
                                     <label style="color: red">*</label>
                                 </label>
-                                <asp:DropDownList CssClass="form-control" ID="DropDownList2" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbPenaltyType_SelectedIndexChanged">
+                                <asp:DropDownList CssClass="form-control" ID="cmbUppercaseRequired" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbPenaltyType_SelectedIndexChanged">
                                     <asp:ListItem Text="--Choose one--" Value="00" Enabled="false"> </asp:ListItem>
                                     <asp:ListItem Text="Yes" Value="1" Enabled="false"> </asp:ListItem>
                                     <asp:ListItem Text="No" Value="0" Enabled="false"> </asp:ListItem>
