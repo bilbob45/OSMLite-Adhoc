@@ -1,0 +1,565 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4C17C4C5-EDB2-40E9-84B3-5D6D71696A06}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Adhocs</RootNamespace>
+    <AssemblyName>Adhocs</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActiveQueryBuilder.Core, Version=3.5.24.1138, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiveQueryBuilder.Core.3.5.24.1138\lib\net\ActiveQueryBuilder.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveQueryBuilder.EventMetadataProvider, Version=3.5.24.1138, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiveQueryBuilder.Core.3.5.24.1138\lib\net\ActiveQueryBuilder.EventMetadataProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveQueryBuilder.View, Version=3.5.24.1138, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiveQueryBuilder.Web.WebForms.3.4.7.2\lib\net\ActiveQueryBuilder.View.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveQueryBuilder.Web.Server, Version=3.4.7.2, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiveQueryBuilder.Web.WebForms.3.4.7.2\lib\net\ActiveQueryBuilder.Web.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveQueryBuilder.Web.WebForms, Version=3.4.7.2, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiveQueryBuilder.Web.WebForms.3.4.7.2\lib\net\ActiveQueryBuilder.Web.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.7.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WebForms\bin\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.1.1\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Interop, Version=2.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Interop.2.1.2\lib\net461\Microsoft.Owin.Security.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.v12.12.0.0.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Development\Project\Reports\Microsoft Report DLL\Microsoft.ReportViewer.DataVisualization.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Development\Project\Reports\Microsoft Report DLL\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.4.5.0\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\bootstrap.min.css" />
+    <Content Include="assets\codemirror.min.css" />
+    <Content Include="assets\codemirror.min.js" />
+    <Content Include="assets\jquery-2.2.4.min.js" />
+    <Content Include="assets\jquery-ui.min.js" />
+    <Content Include="assets\jqx-all.js" />
+    <Content Include="assets\jqx.base.css" />
+    <Content Include="assets\jsgrid-theme.min.css" />
+    <Content Include="assets\jsgrid.min.css" />
+    <Content Include="assets\jsgrid.min.js" />
+    <Content Include="assets\jsoneditor.min.css" />
+    <Content Include="assets\jsoneditor.min.js" />
+    <Content Include="assets\md\css\materialdesignicons.css" />
+    <Content Include="assets\md\css\materialdesignicons.min.css" />
+    <Content Include="assets\md\preview.html" />
+    <Content Include="assets\react-data-grid.min.js" />
+    <Content Include="assets\react-dom.min.js" />
+    <Content Include="assets\react.min.js" />
+    <Content Include="assets\script\bootstrap-datetimepicker.js" />
+    <Content Include="assets\script\bootstrap.bundle.js" />
+    <Content Include="assets\script\bootstrap.bundle.min.js" />
+    <Content Include="assets\script\bootstrap.min.js" />
+    <Content Include="assets\script\jquery-2.2.4.min.js" />
+    <Content Include="assets\script\jquery-3.4.0.min.js" />
+    <Content Include="assets\script\jquery-ui.js" />
+    <Content Include="assets\script\jquery-ui.min.js" />
+    <Content Include="assets\script\popper.min.js" />
+    <Content Include="assets\script\WebForms\GridView.js" />
+    <Content Include="assets\script\WebForms\TreeView.js" />
+    <Content Include="assets\select2\css\select2.min.css" />
+    <Content Include="assets\select2\js\select2.full.min.js" />
+    <Content Include="assets\sql.min.js" />
+    <Content Include="assets\style\bootstrap.min.css" />
+    <Content Include="assets\style\jquery-ui.css" />
+    <Content Include="assets\themes_black-tie_jquery-ui.css" />
+    <Content Include="audit.aspx" />
+    <Content Include="Error\404.aspx" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="HelicaInsight\HelicaInsightSSOGen.aspx" />
+    <Content Include="mgtcomponent\bankratingsetup.aspx" />
+    <Content Include="mgtcomponent\bankratingscore.aspx" />
+    <Content Include="mgtcomponent\bankratingsetupview.aspx" />
+    <Content Include="mgtcomponent\liquiditystresstest.aspx" />
+    <Content Include="penalty\npenalty.aspx" />
+    <Content Include="penalty\vpenalty.aspx" />
+    <Content Include="report-test.aspx" />
+    <Content Include="returns\radjustment.aspx" />
+    <Content Include="rules\radjustments.aspx" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\md\css\materialdesignicons.css.map" />
+    <Content Include="assets\md\css\materialdesignicons.min.css.map" />
+    <Content Include="assets\md\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="assets\md\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="assets\md\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="assets\md\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="assets\md\license.md" />
+    <Content Include="assets\md\package.json" />
+    <Content Include="assets\md\README.md" />
+    <Content Include="assets\md\scss\materialdesignicons.scss" />
+    <Content Include="assets\md\scss\_animated.scss" />
+    <Content Include="assets\md\scss\_core.scss" />
+    <Content Include="assets\md\scss\_extras.scss" />
+    <Content Include="assets\md\scss\_functions.scss" />
+    <Content Include="assets\md\scss\_icons.scss" />
+    <Content Include="assets\md\scss\_path.scss" />
+    <Content Include="assets\md\scss\_variables.scss" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Site.Master" />
+    <Content Include="SysManagement\pswdpolsettings.aspx" />
+    <Content Include="SysManagement\sysmanagement.aspx" />
+    <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="audit.aspx.cs">
+      <DependentUpon>audit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="audit.aspx.designer.cs">
+      <DependentUpon>audit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HelicaInsight\HelicaInsightSSOGen.aspx.cs">
+      <DependentUpon>HelicaInsightSSOGen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HelicaInsight\HelicaInsightSSOGen.aspx.designer.cs">
+      <DependentUpon>HelicaInsightSSOGen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logic\DatabaseHandler\SqlHelper.cs" />
+    <Compile Include="Logic\Infrastructure\AlertUtility.cs" />
+    <Compile Include="Logic\Infrastructure\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logic\Infrastructure\EnvironmentType.cs" />
+    <Compile Include="Logic\Infrastructure\LogUtitlity.cs" />
+    <Compile Include="Logic\Infrastructure\SessionUtility.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logic\Infrastructure\SharedConst.cs" />
+    <Compile Include="Logic\Infrastructure\StringUtility.cs" />
+    <Compile Include="Logic\Infrastructure\Utility.cs" />
+    <Compile Include="Logic\Object\TCoreDeptUnit.cs" />
+    <Compile Include="Logic\Object\TCoreReportingInstitutionObject.cs" />
+    <Compile Include="Logic\Object\TCoreRiTypeObject.cs" />
+    <Compile Include="Logic\Object\TCoreUsersObject.cs" />
+    <Compile Include="Logic\Object\TDbQueryGroupMemberObject.cs" />
+    <Compile Include="Logic\Object\TDbQueryGroupObject.cs" />
+    <Compile Include="Logic\Object\TRPComputationBankRatingSetupObject.cs" />
+    <Compile Include="Logic\Object\TRPTComputationBankRatingScoringObject.cs" />
+    <Compile Include="Logic\Object\TRPTComputationRuleAdjustmentObject.cs" />
+    <Compile Include="Logic\Object\TRPTComputationRuleBaseObject.cs" />
+    <Compile Include="Logic\Object\TRPTComputationValueTableObject.cs" />
+    <Compile Include="Logic\Object\TRPTLiqStressTestDataDefnObject.cs" />
+    <Compile Include="Logic\Object\TRPTLiqStressTestScoringObject.cs" />
+    <Compile Include="Logic\Object\TRTNReturnsWorkCollectionMappingObject.cs" />
+    <Compile Include="Logic\Object\TRTNWorkCollectionScheduleObject.cs" />
+    <Compile Include="Logic\Object\TSysConfigurationIrsObject.cs" />
+    <Compile Include="Logic\Object\VRTNUserDeptRoleForQbObject.cs" />
+    <Compile Include="Logic\Object\VRTNWorkCollectionObject.cs" />
+    <Compile Include="Logic\ServiceContract\ILoggerFactory.cs" />
+    <Compile Include="Logic\DatabaseHandler\DatabaseOps.cs" />
+    <Compile Include="Logic\Infrastructure\IStringUtility.cs" />
+    <Compile Include="Logic\ServiceHandler\ConnectionString.cs" />
+    <Compile Include="Logic\ServiceHandler\CryptoServiceHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\Penalties.cs" />
+    <Compile Include="Logic\ServiceHandler\PenaltyWorkCollection.cs" />
+    <Compile Include="Logic\ServiceHandler\QueryStringHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\ReportExtentions.cs" />
+    <Compile Include="Logic\ServiceHandler\ReportGroup.cs" />
+    <Compile Include="Logic\ServiceHandler\ReportGroupMember.cs" />
+    <Compile Include="Logic\ServiceHandler\ReportInGroup.cs" />
+    <Compile Include="Logic\ServiceHandler\Reports.cs" />
+    <Compile Include="Logic\ServiceHandler\RuleVarianceAdjustment.cs" />
+    <Compile Include="Logic\ServiceHandler\ServiceBaseHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\SubmissionReferenceCalc.cs" />
+    <Compile Include="Logic\ServiceHandler\TCoreUsers.cs" />
+    <Compile Include="Logic\ServiceHandler\TDbQueryGroupHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\TDbQueryGroupMemberHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\TRPTComputationBankRatingScoringHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\TRPTComputationBankRatingSetupHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\TRPTComputationRuleAdjustmentHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\TRPTComputationRuleBaseHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\TRPTComputationValueTableHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\TRPTLiqStressTestDataDefnHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\TRPTLiqStressTestScoringHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\TRTNWorkCollectionScheduleHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\TSysConfigurationIrsHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\VRTNWorkCollectionHandler.cs" />
+    <Compile Include="mgtcomponent\bankratingsetup.aspx.cs">
+      <DependentUpon>bankratingsetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mgtcomponent\bankratingsetup.aspx.designer.cs">
+      <DependentUpon>bankratingsetup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mgtcomponent\bankratingscore.aspx.cs">
+      <DependentUpon>bankratingscore.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mgtcomponent\bankratingscore.aspx.designer.cs">
+      <DependentUpon>bankratingscore.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mgtcomponent\bankratingsetupview.aspx.cs">
+      <DependentUpon>bankratingsetupview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mgtcomponent\bankratingsetupview.aspx.designer.cs">
+      <DependentUpon>bankratingsetupview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mgtcomponent\liquiditystresstest.aspx.cs">
+      <DependentUpon>liquiditystresstest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mgtcomponent\liquiditystresstest.aspx.designer.cs">
+      <DependentUpon>liquiditystresstest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="penalty\npenalty.aspx.cs">
+      <DependentUpon>npenalty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="penalty\npenalty.aspx.designer.cs">
+      <DependentUpon>npenalty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="penalty\vpenalty.aspx.cs">
+      <DependentUpon>vpenalty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="penalty\vpenalty.aspx.designer.cs">
+      <DependentUpon>vpenalty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report-test.aspx.cs">
+      <DependentUpon>report-test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report-test.aspx.designer.cs">
+      <DependentUpon>report-test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="returns\radjustment.aspx.cs">
+      <DependentUpon>radjustment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="returns\radjustment.aspx.designer.cs">
+      <DependentUpon>radjustment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="rules\radjustments.aspx.cs">
+      <DependentUpon>radjustments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rules\radjustments.aspx.designer.cs">
+      <DependentUpon>radjustments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.designer.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SysManagement\pswdpolsettings.aspx.cs">
+      <DependentUpon>pswdpolsettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysManagement\pswdpolsettings.aspx.designer.cs">
+      <DependentUpon>pswdpolsettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysManagement\sysmanagement.aspx.cs">
+      <DependentUpon>sysmanagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysManagement\sysmanagement.aspx.designer.cs">
+      <DependentUpon>sysmanagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.designer.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Logic\ServiceHandler\ReturnAdjustment.cs" />
+    <Compile Include="Logic\ServiceHandler\ReturnInstitutions.cs" />
+    <Compile Include="Logic\ServiceHandler\QueryStore.cs" />
+    <Compile Include="Logic\ServiceHandler\TCoreRiType.cs" />
+    <Compile Include="Logic\DatabaseHandler\DatabaseHelper.cs" />
+    <Compile Include="Logic\ServiceHandler\UserIdentityHandler.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\DataBaseHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Site.Mobile.Master" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Code\" />
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>62743</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:62741/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
