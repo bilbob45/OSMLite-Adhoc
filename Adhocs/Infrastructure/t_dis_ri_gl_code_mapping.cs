@@ -1,0 +1,68 @@
+namespace Adhocs.Infrastructure
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    public partial class t_dis_ri_gl_code_mapping
+    {
+        [Key]
+        [Column(Order = 0)]
+        [StringLength(40)]
+        public string ri_code { get; set; }
+
+        [Key]
+        [Column(Order = 1)]
+        [StringLength(40)]
+        public string gl_code { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
+        [StringLength(40)]
+        public string gl_code_2 { get; set; }
+
+        [Key]
+        [Column(Order = 3)]
+        [StringLength(40)]
+        public string gl_code_3 { get; set; }
+
+        [Key]
+        [Column(Order = 4)]
+        [StringLength(40)]
+        public string ccy_code { get; set; }
+
+        [StringLength(1024)]
+        public string source_gl_desc { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string source_gl_type { get; set; }
+
+        [Required]
+        [StringLength(40)]
+        public string dr_bal_item_code { get; set; }
+
+        [Required]
+        [StringLength(40)]
+        public string cr_bal_item_code { get; set; }
+
+        [Key]
+        [Column(Order = 5)]
+        public DateTime start_validity_date { get; set; }
+
+        public DateTime end_validity_date { get; set; }
+
+        public DateTime created_date { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string created_by { get; set; }
+
+        public DateTime? last_modified { get; set; }
+
+        [StringLength(255)]
+        public string modified_by { get; set; }
+    }
+}

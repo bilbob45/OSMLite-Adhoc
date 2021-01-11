@@ -207,13 +207,29 @@ namespace Adhocs.Logic.ServiceHandler
             return RealData;
         }
 
+        /// <summary>
+        /// Get the institution the currently logged in user belongs to -  i.e CBN or NDIC
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public string UserInst(TCoreUsersObject username)
+        {
+            string data = UserInst(username.user_name);
+            return data;
+        }
+
+        /// <summary>
+        /// Get the institution the currently logged in user belongs to -  i.e CBN or NDIC
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string UserInst(string username)
         {
             string data = null;
             var sqlText = $@"select user_inst from t_core_users where user_name = @user_name and is_regulator = 1";
             using (SqlCommand command = new SqlCommand(sqlText, DatabaseOps.OpenSqlConnection()))
             {
-                command.Parameters.AddWithValue("@user_name", username.user_name);
+                command.Parameters.AddWithValue("@user_name", username);
                 data = _databaseOperations.GetData(command);
                 if (string.IsNullOrWhiteSpace(data))
                 {

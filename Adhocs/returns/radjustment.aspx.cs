@@ -16,6 +16,7 @@ using System.Transactions;
 using System.Collections;
 using System.Threading.Tasks;
 using Adhocs.Logic.Infrastructure;
+using System.Diagnostics;
 
 namespace Adhocs.returns
 {
@@ -32,21 +33,6 @@ namespace Adhocs.returns
         {
             try
             {
-                //if (!String.IsNullOrWhiteSpace(Request.QueryString[SharedConst.QUERY_STRING_USER_NAME]))
-                //{
-                //    currentUser = Request.QueryString[SharedConst.QUERY_STRING_USER_NAME].ToString();
-                //    //Get the user name of the currently logged in user and decrypt it
-
-                //    //Uncomment the below line of code when the crypographics module is okay
-                //    //var encryptedQueryString = Request.QueryString[SharedConst.QUERY_STRING_USER_NAME];
-                //    //currentUser = HttpUtility.UrlDecode(encryptedQueryString.Trim());                  
-                //    //currentUser = CryptoServiceHandler.Decrypt(currentUser, CryptoServiceHandler.ENCRYPTION_PASS_PHRASE);
-                //}
-                //else
-                //{
-                //    this.frmRAdjustment.Visible = false;
-                //}
-
                 if (base.Error.Count > 0)
                 {
                     this.frmRAdjustment.Visible = false;
@@ -55,7 +41,7 @@ namespace Adhocs.returns
 
                 if (!Page.IsPostBack)
                 {
-                    _riType.GetAdjustmentRiType(this.cmbInstitutionType);
+                    _riType.BindReturnAdjustmentRiType(this.cmbInstitutionType);
                     this.cmbInstitutionType.Items.Insert(0, "-choose one-");
                 }
             }
@@ -128,8 +114,6 @@ namespace Adhocs.returns
                 }
                 catch(Exception ex)
                 {
-                    divAlert.Visible = true;
-                    lblErrorMsg.Text = ex.ToString();
                     LogUtitlity.LogToText(ex.ToString());
                 }
             }
@@ -178,7 +162,6 @@ namespace Adhocs.returns
                 if (dtable.Rows.Count > 0)
                 {
                     SaveToSession(SharedConst.S_SCHEDULE_ID, dtable.Rows[0]["schedule_id"].ToString());
-
                     SaveToSession(SharedConst.S_RUN_ID, dtable.Rows[0]["run_id"].ToString());
                     SaveToSession(SharedConst.S_ANALYST_COMMENTS, dtable.Rows[0]["analyst_comment"].ToString());
 
@@ -189,13 +172,19 @@ namespace Adhocs.returns
                         var riid = this.cmbReportingInstitution.SelectedValue;
 
                         //Bind mbr300 grid to datasource
+                        Debug.WriteLine("Table name mapped to gridviewLeft300 = " + GetFromSession("table1"));
+
                         this.gridviewLeft300.DataSource = raHandler.MBR300ReturnAdjustment(GetFromSession("table1"), riid, GetFromSession(SharedConst.S_SCHEDULE_ID).ToString(), GetFromSession(SharedConst.S_RUN_ID).ToString());
                         this.gridviewLeft300.DataBind();
 
                         //
                         //Add comma character to specific grid values
                         //
-                        FormatGridCellValues(GetFromSession("table1"));
+                        var tablefromSession = GetFromSession("table1");
+
+                        Debug.WriteLine("Table name" + tablefromSession);
+
+                        FormatGridCellValues(tablefromSession);
 
                         //Bind mbr1000 grid to datasource
                         this.gridviewRight1000.DataSource = raHandler.MBR1000ReturnAdjustment(GetFromSession("table2"), riid, GetFromSession(SharedConst.S_SCHEDULE_ID).ToString(), GetFromSession(SharedConst.S_RUN_ID).ToString());
@@ -235,7 +224,8 @@ namespace Adhocs.returns
             catch (Exception ex)
             {
                 divAlert.Visible = true;
-                lblErrorMsg.Text = "Internal system error";
+                lblErrorMsg.Text = ex.ToString();
+                //lblErrorMsg.Text = "Internal system error";
                 LogUtitlity.LogToText(ex.ToString());
             }
         }
@@ -662,7 +652,7 @@ namespace Adhocs.returns
         #region helper functions for heavy lifting
         private String ConvertDecimalToMoney(decimal decimalnumber)
         {
-            return decimalnumber.ToString("0,0.00").Insert(0, "₦");            
+            return decimalnumber.ToString("0,0.00").Insert(0, "₦");
             //return decimalnumber.ToString("C3", CultureInfo.CurrentCulture);//.Replace("₦", " ").Replace("£", " ").Replace("$", " ");
         }
 
@@ -681,15 +671,18 @@ namespace Adhocs.returns
 
         public String GetFromSession(string key)
         {
+            string sessionValue = string.Empty;
             try
             {
-                return Session[key].ToString();
+                sessionValue = Session[key].ToString();
             }
             catch (Exception ex)
             {
                 LogUtitlity.LogToText(ex.ToString());
                 return null;
             }
+
+            return sessionValue;
         }
 
         private void SaveToSession(string[] key, string[] value)
@@ -710,9 +703,15 @@ namespace Adhocs.returns
                 //Set the currency symbol of some specific gridiew cell value
                 if (tablename.Equals(SharedConst.T_SUBMISSION_MDHR300))
                 {
+                    Debug.WriteLine("Table nam to check" + SharedConst.T_SUBMISSION_MDHR300);
+
                     foreach (GridViewRow grdRow in this.gridviewLeft300.Rows)
                     {
+                        Debug.WriteLine("Table Cell Value 1" + grdRow.Cells[9].Text);
+                        
                         grdRow.Cells[9].Text = ConvertDecimalToMoney(Convert.ToDecimal(grdRow.Cells[9].Text));
+
+                        Debug.WriteLine("Table Cell Value 2 " + grdRow.Cells[10].Text);
                         grdRow.Cells[10].Text = ConvertDecimalToMoney(Convert.ToDecimal(grdRow.Cells[10].Text));
                     }
                     return;
@@ -720,7 +719,11 @@ namespace Adhocs.returns
 
                 foreach (GridViewRow grdRow in this.gridviewLeft300.Rows)
                 {
+                    Debug.WriteLine("Table Cell Value before = " + grdRow.Cells[9].Text);
+
                     grdRow.Cells[9].Text = ConvertDecimalToMoney(Convert.ToDecimal(grdRow.Cells[9].Text));
+
+                    Debug.WriteLine("Table Cell Value after = " + grdRow.Cells[9].Text);
                 }
             }
             else

@@ -48,8 +48,8 @@ namespace Adhocs.mgtcomponent
 
                 if (!Page.IsPostBack)
                 {
-                    riType.GetAllRiTypes(this.cmbRiType);
-                    this.cmbRiType.Items.Insert(0, "-choose one-");
+                    riType.BindAllRiTypes(this.cmbRiType);
+                    this.cmbRiType.Items.Insert(0, new ListItem(SharedConst.DEFAULT_DROP_DOWN_SELECTION, "0", true));
                 }
             }
             catch(Exception ex)

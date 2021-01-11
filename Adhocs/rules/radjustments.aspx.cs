@@ -84,6 +84,11 @@ namespace Adhocs.rules
         }
         #endregion
 
+        //public IEnumerable<string> BindRIType()
+        //{
+
+        //}
+
         protected void cmbRiType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.cmbRiType.SelectedItem.ToString() != null && this.cmbRiType.SelectedValue != "0")

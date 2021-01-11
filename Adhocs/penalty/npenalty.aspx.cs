@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using Adhocs.Logic.ServiceHandler;
 using Adhocs.Logic.Infrastructure;
 using System.Data.SqlClient;
+using Adhocs.Infrastructure;
 
 namespace Adhocs.penalty
 {
@@ -15,9 +16,9 @@ namespace Adhocs.penalty
     {
         Penalties _penalties = new Penalties();
         PenaltiesModel _penaltiesModel = null;
-        PenaltyWorkCollectionModel _penaltyWcModel = null;
+        //PenaltyWorkCollectionModel _penaltyWcModel = null;
         TCoreRiType _riType = new TCoreRiType();
-        Dictionary<int, string> _selectedWorkCollections = new Dictionary<int, string>();
+        //Dictionary<int, string> _selectedWorkCollections = new Dictionary<int, string>();
         QueryStringHandler _qHandler = null;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -58,21 +59,21 @@ namespace Adhocs.penalty
                 if (!Page.IsPostBack)
                 {
                     this.hdRs.Value = SharedConst.PENALTY_TYPE_NOT_RS;
-
-                    _penalties.BindWorkCollection(this.cmbWorkCollection);
-                    this.cmbWorkCollection.Items.Insert(0, new ListItem(SharedConst.DEFAULT_DROP_DOWN_SELECTION, "0", true));
+                    
+                    //_penalties.BindWorkCollection(this.cmbWorkCollection);
+                    //this.cmbWorkCollection.Items.Insert(0, new ListItem(SharedConst.DEFAULT_DROP_DOWN_SELECTION, "0", true));
 
                     _penalties.BindPenalties(this.cmbPenaltyType);
                     this.cmbPenaltyType.Items.Insert(0, new ListItem(SharedConst.DEFAULT_DROP_DOWN_SELECTION, "0", true));
 
-                    _riType.GetAllRiTypes(this.cmbRiType);
-                    this.cmbRiType.Items.Insert(0, new ListItem(SharedConst.DEFAULT_DROP_DOWN_SELECTION, "0", true));
+                    //_riType.BindAllRiTypes(this.cmbRiType);
+                    //this.cmbRiType.Items.Insert(0, new ListItem(SharedConst.DEFAULT_DROP_DOWN_SELECTION, "0", true));
 
-                    _penalties.BindPenaltyFrequncies(this.cmbPenaltyFrequency);
-                    this.cmbPenaltyFrequency.Items.Insert(0, new ListItem(SharedConst.DEFAULT_DROP_DOWN_SELECTION, "0", true));
+                    //_penalties.BindPenaltyFrequncies(this.cmbPenaltyFrequency);
+                    //this.cmbPenaltyFrequency.Items.Insert(0, new ListItem(SharedConst.DEFAULT_DROP_DOWN_SELECTION, "0", true));
 
-                    _penalties.BindFrequncies(this.cmbFrequency);
-                    this.cmbPenaltyFrequency.Items.Insert(0, new ListItem(SharedConst.DEFAULT_DROP_DOWN_SELECTION, "0", true));
+                    //_penalties.BindFrequncies(this.cmbFrequency);
+                    //this.cmbPenaltyFrequency.Items.Insert(0, new ListItem(SharedConst.DEFAULT_DROP_DOWN_SELECTION, "0", true));
                 }
             }
             catch(Exception ex)
@@ -81,9 +82,85 @@ namespace Adhocs.penalty
             }
         }
 
+        public IQueryable GetWorkCollection()
+        {
+            var dbContext = new IRSAdhocContext();
+
+            var query = (from intt in dbContext.t_pnt_penalty_work_collection_mapping 
+                     join defn in dbContext.t_rtn_work_collection_defn 
+                     on intt.work_collection_id 
+                     equals defn.work_collection_id
+                     select new {
+                         work_collection_code = defn.work_collection_code + " - " + defn.description,
+                         work_collection_id = defn.work_collection_id
+                     });
+
+            return query;
+        }
+
+        public IQueryable GetPenaltyType()
+        {
+            var dbContext = new IRSAdhocContext();
+            var query = (from ptype in dbContext.t_lkup_penalty_type
+                         where ptype.description != null
+                         orderby ptype.description ascending
+                         select new
+                         {
+                             penalty_type = ptype.penalty_type,
+                             description = ptype.description
+                         });
+
+            return query;
+        }
+
+        public IQueryable GetPenaltyFreq()
+        {
+            var dbContext = new IRSAdhocContext();
+            var query = (from pfreq in dbContext.t_lkup_frequency //t_lkup_frequency
+                         where pfreq.freq_desc != null
+                         orderby pfreq.freq_desc ascending
+                         select new
+                         {
+                             freq_unit = pfreq.freq_unit,
+                             freq_desc = pfreq.freq_desc
+                         });
+
+            return query;
+        }
+
+        public IQueryable GetFrequencies()
+        {
+            var dbContext = new IRSAdhocContext();
+            var query = (from pfreq in dbContext.t_lkup_frequency
+                         where pfreq.freq_desc != null
+                         orderby pfreq.freq_desc ascending
+                         select new
+                         {
+                             freq_unit = pfreq.freq_unit,
+                             freq_desc = pfreq.freq_desc
+                         });
+
+            return query;
+        }
+
+        public IQueryable GetRITypes()
+        {
+            var dbContext = new IRSAdhocContext();
+            var query = (from ritype in dbContext.t_core_ri_type
+                         where ritype.description != null
+                         orderby ritype.description ascending
+                         select new
+                         {
+                             ri_type_id = ritype.ri_type_id,
+                             description = ritype.ri_type_code + " " + ritype.description
+                         });
+
+            return query;
+        }
+
         protected void cmbPenaltyType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.cmbPenaltyType.SelectedValue == "RS"/* && !string.IsNullOrWhiteSpace(this.txtPenaltyCode.Value)*/)
+            if (this.cmbPenaltyType.SelectedValue == "RS")
             {
                 this.hdRs.Value = SharedConst.PENALTY_TYPE_RS;
                 if (this.hdRs.Value == SharedConst.PENALTY_TYPE_RS && this.txtPenaltyCode.Value != "")
@@ -110,54 +187,150 @@ namespace Adhocs.penalty
 
         }
 
-        protected void ValidateForm()
+        protected static void ValidateForm()
         {
-            this.divnpenalty.Visible = true;
-            if (String.IsNullOrWhiteSpace(txtPenaltyCode.Value))
+            var response = new ResponseHandler();
+        }
+
+        [WebMethod]
+        public static object SavePenalty(PenaltiesModel pinfo, /*int ptype,*/ List<int> penaltyWCModel = null)
+        {
+            var rowsAffected = 0;
+            var response = new ResponseHandler();
+            try
             {
-                this.lblFrmError.Text = "Penalty code is required.";
-                return;
+                object ValidateForm()
+                {
+                    if (String.IsNullOrWhiteSpace(pinfo.penalty_code))
+                    {
+                        response.Status = 0;
+                        response.Message = "Penalty code is required.";
+                        return response;
+                    }
+
+                    if (pinfo.penalty_type.ToLower().Equals("rs") && penaltyWCModel.Count < 1)
+                    {
+                        response.Status = 0;
+                        response.Message = "Work collection should be added to a return submissioin penalty type.";
+                        return response;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(pinfo.penalty_desc))
+                    {
+                        response.Status = 0;
+                        response.Message = "Penalty description is required.";
+                        return response;
+                    }
+                    
+                    if (pinfo.ri_type_id == null || pinfo.ri_type_id == 0)
+                    {
+                        response.Status = 0;
+                        response.Message = "Return institution type is required.";
+                        return response;
+                    }
+                    
+                    if (pinfo.penalty_type.ToLower().Equals("--choose one--") || pinfo.penalty_type == "")
+                    {
+                        response.Status = 0;
+                        response.Message = "Penalty type is required.";
+                        return response;
+                    }
+                    
+                    if (string.IsNullOrWhiteSpace(pinfo.frequncy))
+                    {
+                        response.Status = 0;
+                        response.Message = "Penalty frequency is required.";
+                        return response;
+                    }
+                    
+                    if (string.IsNullOrWhiteSpace(pinfo.penalty_freq_unit.ToString()))
+                    {
+                        response.Status = 0;
+                        response.Message = "Penalty frequency unit is required.";
+                        return response;
+                    }
+                    
+                    if (string.IsNullOrWhiteSpace(pinfo.penalty_value.ToString()))
+                    {
+                        response.Status = 0;
+                        response.Message = "Penalty value is required.";
+                        return response;
+                    }
+                    
+                    if (pinfo.start_validity_date < DateTime.Now)
+                    {
+                        response.Status = 0;
+                        response.Message = "Penalty start validity date must be in the present or future date";
+                        return response;
+                    }
+
+                    return response;
+                };
+
+                ValidateForm();
+
+                var _penalties = new Penalties();
+
+                if (pinfo.penalty_type == SharedConst.PENALTY_TYPE_RS)
+                {
+                    Dictionary<int, string> _selectedWorkCollections = new Dictionary<int, string>();
+                    foreach (var li in penaltyWCModel)
+                    {
+                        if (li != null)
+                        {
+                            _selectedWorkCollections.Add(li, li.ToString());
+                        }
+                    }
+                    var _penaltyWcModel = new PenaltyWorkCollectionModel();
+                    _penaltyWcModel.penalty_code = pinfo.penalty_code;
+                    _penaltyWcModel.work_collection_id = _selectedWorkCollections;
+                    _penaltyWcModel.created_date = DateTime.Now;
+                    _penaltyWcModel.created_by = pinfo.created_by;
+
+                    rowsAffected = _penalties.SavePenalty(pinfo, _penaltyWcModel);
+                }
+                else
+                {
+                    rowsAffected = _penalties.SavePenalty(pinfo);
+                }
+
+                if (rowsAffected > 0)
+                {
+                    response.Status = rowsAffected;
+                    response.Message = $"Penalty records '{pinfo.penalty_code}' saved successfuly.";
+                    return response;
+                    //divAlert.Visible = true;
+                    //divAlert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                    //lblFrmError.Text = $"Penalty records '{this.txtPenaltyCode.Value}' saved successfuly, <a href='{Request.Url.ToString()}'>add</a> new penalty";
+                    //this.btnSave.Enabled = false;
+                }
+                else
+                {
+                    response.Status = rowsAffected;
+                    response.Message = "Error while saving penalty details";
+                    return response;
+                }
             }
-            else if (string.IsNullOrWhiteSpace(txtPenaltyDescription.Value))
+            catch (SqlException sqlEx)
             {
-                this.lblFrmError.Text = "Penalty description is required.";
-                return;
+                LogUtitlity.LogToText(sqlEx.ToString());
+
+                if (sqlEx.Number == 2627)
+                {
+                    response.Status = 0;
+                    response.Message = "Penalty code already exists";
+                    return response;
+                }
             }
-            else if (this.cmbRiType.SelectedItem.ToString().Equals("--choose one--"))
+            catch (Exception ex)
             {
-                this.lblFrmError.Text = "Return institution type is required.";
-                return;
+                LogUtitlity.LogToText(ex.ToString());
+                response.Status = 0;
+                response.Message = "Couldn't add penalty details";
+                return response;
             }
-            else if (this.cmbPenaltyType.SelectedItem.ToString().Equals("--choose one--"))
-            {
-                this.lblFrmError.Text = "Penalty type is required.";
-                return;
-            }
-            else if (string.IsNullOrWhiteSpace(cmbPenaltyFrequency.SelectedValue))
-            {
-                this.lblFrmError.Text = "Penalty frequency is required.";
-                return;
-            }
-            else if (string.IsNullOrWhiteSpace(txtPenaltyFreqUnit.Value))
-            {
-                this.lblFrmError.Text = "Penalty frequency unit is required.";
-                return;
-            }
-            else if (string.IsNullOrWhiteSpace(txtPenaltyValue.Value))
-            {
-                this.lblFrmError.Text = "Penalty value is required.";
-                return;
-            }
-            else if (DateTime.TryParse(txtStartValDate.Text, out DateTime date))
-            {
-                this.lblFrmError.Text = "Penalty frequency is required.";
-                return;
-            }
-            else
-            {
-                //Submit the for to the database
-                this.divnpenalty.Visible = false;
-            }
+
+            return response;
         }
 
         protected void btnSavePenalty_Click(object sender, EventArgs e)
@@ -184,7 +357,7 @@ namespace Adhocs.penalty
                 _penaltiesModel.penalty_per_unit = (cmbPenaltyPerUnit.SelectedValue.Equals("0")) ? false : true;
                 _penaltiesModel.failed_penalty_value = txtFailedPenaltyValue.Value;
                 _penaltiesModel.penalty_value = Convert.ToDecimal(txtPenaltyValue.Value);
-                _penaltiesModel.start_validity_date = Convert.ToDateTime(Convert.ToDateTime(txtStartValDate.Text).ToShortDateString());
+                //_penaltiesModel.start_validity_date = Convert.ToDateTime(Convert.ToDateTime(txtStartValDate.Text).ToShortDateString());
                 _penaltiesModel.frequncy = cmbFrequency.SelectedValue;
 
                 if (txtEndValDate.Text == "" || txtEndValDate.Text == DateTime.MinValue.ToString())
@@ -197,20 +370,20 @@ namespace Adhocs.penalty
 
                 if (this.hdRs.Value == SharedConst.PENALTY_TYPE_RS)
                 {
-                    foreach (ListItem li in cmbWorkCollection.Items)
-                    {
-                        if (li.Selected)
-                        {
-                            _selectedWorkCollections.Add(Convert.ToInt32(li.Value), li.Text);
-                        }
-                    }
-                    _penaltyWcModel = new PenaltyWorkCollectionModel();
-                    _penaltyWcModel.penalty_code = this.txtPenaltyCode.Value.Trim();
-                    _penaltyWcModel.work_collection_id = _selectedWorkCollections;
-                    _penaltyWcModel.created_date = DateTime.Now;
-                    _penaltyWcModel.created_by = base.currentUser;
+                    //foreach (ListItem li in cmbWorkCollection.Items)
+                    //{
+                    //    if (li.Selected)
+                    //    {
+                    //        _selectedWorkCollections.Add(Convert.ToInt32(li.Value), li.Text);
+                    //    }
+                    //}
+                    //_penaltyWcModel = new PenaltyWorkCollectionModel();
+                    //_penaltyWcModel.penalty_code = this.txtPenaltyCode.Value.Trim();
+                    //_penaltyWcModel.work_collection_id = _selectedWorkCollections;
+                    //_penaltyWcModel.created_date = DateTime.Now;
+                    //_penaltyWcModel.created_by = base.currentUser;
 
-                    rowsAffected = _penalties.SavePenalty(_penaltiesModel, _penaltyWcModel);
+                    //rowsAffected = _penalties.SavePenalty(_penaltiesModel, _penaltyWcModel);
                 }
                 else
                 {
@@ -272,22 +445,22 @@ namespace Adhocs.penalty
             //lblPenaltyId.InnerText = this.cmbWorkCollection.SelectedValue;
         }
 
-        public Dictionary<int, string> GetControlTextValue(ListBox controlid)
-        {
-            if (controlid == null)
-            {
-                throw new ArgumentNullException("control id can not be null");
-            }
+        //public Dictionary<int, string> GetControlTextValue(ListBox controlid)
+        //{
+        //    if (controlid == null)
+        //    {
+        //        throw new ArgumentNullException("control id can not be null");
+        //    }
 
-            foreach (ListItem li in controlid.Items)
-            {
-                if (li.Selected)
-                {
-                    _selectedWorkCollections.Add(Convert.ToInt32(li.Value), li.Text);
-                }
-            }
+        //    foreach (ListItem li in controlid.Items)
+        //    {
+        //        if (li.Selected)
+        //        {
+        //            _selectedWorkCollections.Add(Convert.ToInt32(li.Value), li.Text);
+        //        }
+        //    }
 
-            return _selectedWorkCollections;
-        }
+        //    return _selectedWorkCollections;
+        //}
     }
 }

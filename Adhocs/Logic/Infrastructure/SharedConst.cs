@@ -37,8 +37,8 @@ namespace Adhocs.Logic.Infrastructure
         public static  String S_ANALYST_COMMENTS = "analyst_comment";
 
         //Penalty constants
-        public static String PENALTY_TYPE_RS = "1";
-        public static String PENALTY_TYPE_NOT_RS = "2";
+        public const String PENALTY_TYPE_RS = "1";
+        public const String PENALTY_TYPE_NOT_RS = "2";
 
         //Drpdown constants
         public static String DEFAULT_DROP_DOWN_SELECTION = "--choose one--";
@@ -79,7 +79,11 @@ namespace Adhocs.Logic.Infrastructure
         //Helica Default Settings
         readonly public static String HELICA_DEFAULT_AUTHTOKEN = "edZjvfLYDLnDNHYtQVS1Tq5w1bqaAehYVqaOn43yPI0";
         readonly public static String HELICA_INSTALLATION_PATH = ConfigurationManager.AppSettings["HelicaInstallPath"];
-        readonly public static String HELICA_DEFAULT_ROLENAME = "ROLE_USER";
+        public const String HELICA_DEFAULT_ROLENAME = "ROLE_USER";
         readonly public static string HELICA_DEFAULT_CYPHER_KEY = "HSpnzzfCLqrBn8Lk";
+
+        ///Return Builder ValidationExpression=""
+        readonly public static string RETURN_BUILDER_DOWNLOAD_PATH = ConfigurationManager.AppSettings["RbDownloadDirPath"];
+        readonly public static string RETURN_BUILDER_FILE_NAME_REGEX = "^(([a-zA-Z]:)|(\\{2}\\w+)\\$?)(\\(\\w[\\w].*))+(.zip|.ZIP|.7zip|.7ZIP)$";
     }
 }

@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Adhocs.penalty {
-    
-    
-    public partial class npenalty {
-        
+namespace Adhocs.penalty
+{
+
+
+    public partial class npenalty
+    {
+
         /// <summary>
         /// frmPenalty control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm frmPenalty;
-        
+
         /// <summary>
         /// hdRs control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdRs;
-        
+
         /// <summary>
         /// divnpenalty control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divnpenalty;
-        
+
         /// <summary>
         /// divAlert control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAlert;
-        
+
         /// <summary>
         /// lblFrmError control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFrmError;
-        
+
         /// <summary>
         /// txtPenaltyCode control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtPenaltyCode;
-        
+
         /// <summary>
         /// txtPenaltyDescription control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtPenaltyDescription;
-        
+
         /// <summary>
         /// cmbRiType control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbRiType;
-        
+
         /// <summary>
         /// cmbPenaltyType control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbPenaltyType;
-        
+
         /// <summary>
         /// cmbPenaltyFrequency control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbPenaltyFrequency;
-        
+
         /// <summary>
         /// txtPenaltyFreqUnit control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtPenaltyFreqUnit;
-        
+
         /// <summary>
         /// txtPenaltyDeadlineDay control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtPenaltyDeadlineDay;
-        
+
         /// <summary>
         /// txtPenaltyDeadlineHour control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtPenaltyDeadlineHour;
-        
+
         /// <summary>
         /// txtMinimumLimitsAccepted control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtMinimumLimitsAccepted;
-        
+
         /// <summary>
         /// txtMaximumLimitsAccepted control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtMaximumLimitsAccepted;
-        
+
         /// <summary>
         /// cmbPenaltyPerUnit control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbPenaltyPerUnit;
-        
+
         /// <summary>
         /// txtFailedPenaltyValue control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtFailedPenaltyValue;
-        
+
         /// <summary>
         /// txtPenaltyDeadlineMinute control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtPenaltyDeadlineMinute;
-        
+
         /// <summary>
         /// txtPenaltyValue control.
         /// </summary>
@@ -182,16 +184,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtPenaltyValue;
-        
-        /// <summary>
-        /// txtStartValDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStartValDate;
-        
+
         /// <summary>
         /// cmbFrequency control.
         /// </summary>
@@ -200,7 +193,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbFrequency;
-        
+
         /// <summary>
         /// txtEndValDate control.
         /// </summary>
@@ -209,7 +202,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEndValDate;
-        
+
         /// <summary>
         /// btnSave control.
         /// </summary>
@@ -218,7 +211,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
-        
+
         /// <summary>
         /// lblErrorMsgInPopup control.
         /// </summary>
@@ -227,7 +220,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErrorMsgInPopup;
-        
+
         /// <summary>
         /// lblPenaltyId control.
         /// </summary>
@@ -236,7 +229,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPenaltyId;
-        
+
         /// <summary>
         /// cmbWorkCollection control.
         /// </summary>
@@ -245,16 +238,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox cmbWorkCollection;
-        
-        /// <summary>
-        /// btnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnCancel;
-        
+
         /// <summary>
         /// btnAddWC control.
         /// </summary>

@@ -9,6 +9,10 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Label ID="lblError" runat="server"></asp:Label>
+        </div>
+        <div>
+            <button runat="server" id="btnClickMe" value="Make Request" onserverclick="btnClickMe_ServerClick">Make Request</button>
         </div>
     </form>
 </body>

@@ -49,13 +49,31 @@ namespace Adhocs.SysManagement {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAlert;
         
         /// <summary>
-        /// lblFrmError control.
+        /// lblError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFrmError;
+        protected global::System.Web.UI.WebControls.Label lblError;
+        
+        /// <summary>
+        /// btnEditPolicy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnEditPolicy;
+        
+        /// <summary>
+        /// btnSaveChanges control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnSaveChanges;
         
         /// <summary>
         /// divGrids control.
@@ -76,102 +94,66 @@ namespace Adhocs.SysManagement {
         protected global::System.Web.UI.WebControls.GridView gridViewPasswordPolicy;
         
         /// <summary>
-        /// lblErrorMsgInPopup control.
+        /// divAlertInPopupX control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorMsgInPopup;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAlertInPopupX;
         
         /// <summary>
-        /// txtMinLenght control.
+        /// lblErrorInPopupX control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtMinLenght;
+        protected global::System.Web.UI.WebControls.Label lblErrorInPopupX;
         
         /// <summary>
-        /// cmbRequiredDigit control.
+        /// lblEntryTitleX control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbRequiredDigit;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblEntryTitleX;
         
         /// <summary>
-        /// cmbAlphaNumRequired control.
+        /// txtDefaultValue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbAlphaNumRequired;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDefaultValue;
         
         /// <summary>
-        /// cmbUppercaseRequired control.
+        /// txtPolicyValue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbUppercaseRequired;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPolicyValue;
         
         /// <summary>
-        /// DropDownList5 control.
+        /// cmbEnable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList5;
+        protected global::System.Web.UI.WebControls.DropDownList cmbEnable;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// btnUpdatePolicySettings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
-        
-        /// <summary>
-        /// txtPasswordHistory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPasswordHistory;
-        
-        /// <summary>
-        /// DropDownList4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList4;
-        
-        /// <summary>
-        /// Button1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
-        
-        /// <summary>
-        /// btnSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnSave;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnUpdatePolicySettings;
     }
 }

@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Adhocs.penalty {
-    
-    
-    public partial class vpenalty {
-        
+namespace Adhocs.penalty
+{
+
+
+    public partial class vpenalty
+    {
+
         /// <summary>
         /// frmPenalty control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm frmPenalty;
-        
+
         /// <summary>
         /// divAlert control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAlert;
-        
+
         /// <summary>
         /// lblReportName control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReportName;
-        
+
         /// <summary>
         /// lblAddNewPenalty control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor lblAddNewPenalty;
-        
+
         /// <summary>
         /// lblEditPenalty control.
         /// </summary>
@@ -56,25 +58,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor lblEditPenalty;
-        
-        /// <summary>
-        /// divGrids control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGrids;
-        
-        /// <summary>
-        /// lblTableName300 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTableName300;
-        
+
         /// <summary>
         /// gridViewPenalties control.
         /// </summary>
@@ -83,7 +67,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gridViewPenalties;
-        
+
         /// <summary>
         /// lblErrorMsgInPopup control.
         /// </summary>
@@ -92,7 +76,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErrorMsgInPopup;
-        
+
         /// <summary>
         /// lblPenaltyCode control.
         /// </summary>
@@ -101,7 +85,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPenaltyCode;
-        
+
         /// <summary>
         /// lblPenaltyDescription control.
         /// </summary>
@@ -110,7 +94,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPenaltyDescription;
-        
+
         /// <summary>
         /// lblRiType control.
         /// </summary>
@@ -119,7 +103,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblRiType;
-        
+
         /// <summary>
         /// lblPenaltyType control.
         /// </summary>
@@ -128,7 +112,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPenaltyType;
-        
+
         /// <summary>
         /// lblPenaltyFrequency control.
         /// </summary>
@@ -137,7 +121,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPenaltyFrequency;
-        
+
         /// <summary>
         /// lblPenaltyFrequencyUnit control.
         /// </summary>
@@ -146,88 +130,7 @@ namespace Adhocs.penalty {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPenaltyFrequencyUnit;
-        
-        /// <summary>
-        /// lblDeliveryDay control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDeliveryDay;
-        
-        /// <summary>
-        /// lblDeliveryHour control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDeliveryHour;
-        
-        /// <summary>
-        /// lblDeliveryMinute control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDeliveryMinute;
-        
-        /// <summary>
-        /// lblPenaltyLimit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPenaltyLimit;
-        
-        /// <summary>
-        /// lblPenaltyvalue control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPenaltyvalue;
-        
-        /// <summary>
-        /// lblValidityStart control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblValidityStart;
-        
-        /// <summary>
-        /// lblValidityEnd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblValidityEnd;
-        
-        /// <summary>
-        /// lblCreatedBy control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCreatedBy;
-        
-        /// <summary>
-        /// lblCreatedDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCreatedDate;
-        
+
         /// <summary>
         /// btnCancel control.
         /// </summary>

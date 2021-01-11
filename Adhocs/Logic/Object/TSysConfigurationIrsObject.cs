@@ -20,7 +20,7 @@ namespace Adhocs.Logic.Object
         public String config_value { get; set; }
 
         [Required]
-        public String enabled { get; set; }
+        public Int32 enabled { get; set; }
 
         [Required]
         [MaxLength(1000)]

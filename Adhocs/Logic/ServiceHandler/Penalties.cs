@@ -68,7 +68,7 @@ namespace Adhocs.Logic.ServiceHandler
         {
             try
             {
-                var sqlWhiteList = @"Select freq_unit, freq_desc from t_lkup_frequency";
+                var sqlWhiteList = @"Select freq_unit, freq_desc from t_lkup_frequency"; //
                 using (SqlCommand cmd = new SqlCommand(sqlWhiteList, DatabaseOps.OpenSqlConnection()))
                 {
                     cmd.CommandType = CommandType.Text;
@@ -214,7 +214,7 @@ namespace Adhocs.Logic.ServiceHandler
                         command.Parameters.Add("@max_limit_accepted", penaltymodel.max_limit_accepted);
 
                     command.Parameters.AddWithValue("@penalty_value", penaltymodel.penalty_value);
-                    command.Parameters.AddWithValue("@penalty_per_unit", penaltymodel.penalty_per_unit.Equals("0") ? false : true);
+                    command.Parameters.AddWithValue("@penalty_per_unit", penaltymodel.penalty_per_unit/*.Equals("0") ? false : true*/);
 
                     if(String.IsNullOrWhiteSpace(penaltymodel.failed_penalty_value))
                         command.Parameters.Add("@failed_penalty_value", DBNull.Value);

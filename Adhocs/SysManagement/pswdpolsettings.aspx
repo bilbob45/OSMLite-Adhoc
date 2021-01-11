@@ -33,24 +33,16 @@
         }(jQuery));
 
         $(document).ready(function () {
-            $("#txtMinimumLimitsAccepted").inputFilter(function (value) {
+            $("#txtDefaultValue").inputFilter(function (value) {
                 return /^\d*$/.test(value);
             });
-            $("#txtFailedPenaltyValue").inputFilter(function (value) {
+            $("#txtPolicyValue").inputFilter(function (value) {
                 return /^\d*$/.test(value);
             });
-        });
 
-        //Select 2 initializer
-        $(document).ready(function (e) {
-            $('#cmbRequiredDigit').select2();
-            $('#cmbAlphaNumRequired').select2();
-            $('#cmbUppercaseRequired').select2();
+            //Select 2 initializer
+            $('#cmbEnable').select2();
         });
-
-        function openModalPwPolicy() {
-            $('#exampleModalCenter').modal('show');
-         }
     </script>
     <style type="text/css" lang="en">
         * {
@@ -61,6 +53,11 @@
         .select2 {
             width: 100% !important;
         }
+
+        .WrapText {  
+            width: 100%;  
+            word-break: break-all;  
+        }  
     </style>
 </head>
 <body>
@@ -70,7 +67,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <div class="alert alert-danger alert-dismissible" role="alert" visible="false" runat="server" id="divAlert">
-                        <asp:Label ID="lblFrmError" runat="server" Text=""> </asp:Label>
+                        <asp:Label ID="lblError" runat="server" Text=""> </asp:Label>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -79,21 +76,37 @@
             </div>
 
             <div class="form-row mb-4">
-                <label class="h4">All Password Policy Settings</label>
+                <label class="h4">Password Policy Settings</label>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonQuery" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Choose Action</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonQuery">
+                            <a class="dropdown-item" runat="server" id="btnEditPolicy" href="#" onserverclick="btnEditPolicy_ServerClick">Edit Policy Entry</a>
+                            <a class="dropdown-item" runat="server" id="btnSaveChanges" onserverclick="btnSave_ServerClick" href="#">Save all changes</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-10">
+                    <input type="text" placeholder="Search password policy - enter policy name" autocomplete="off" id="txtSearchPolicy" class="form-control" />
+                </div>
             </div>
             <div class="form-row" id="divGrids" runat="server">
-                <div class="form-group col-md-12" style="overflow:scroll; max-height:400px">
-                    <div>
+                <div class="form-group col-md-12" style="overflow: scroll; max-height: 400px">
+                    <div class="WrapText">
                         <asp:GridView ID="gridViewPasswordPolicy"
                             runat="server"
                             HeaderStyle-Wrap="false"
                             RowStyle-Wrap="false"
-                            EmptyDataText="There is no report(s) to display for the selected department"
+                            DataKeyNames="Configuration ID"
+                            EmptyDataText="There is no data available to display"
                             AutoGenerateColumns="true"
-                            ViewStateMode="Enabled"
+                            ViewStateMode="Enabled" RowStyle-CssClass="WrapText"
                             CssClass="table table-striped table-bordered table-hover table-header-fixed"
-                            AutoGenerateSelectButton="True" OnSelectedIndexChanged="gridViewPasswordPolicy_SelectedIndexChanged" 
-                            OnRowDataBound="gridViewPasswordPolicy_RowDataBound">
+                            OnRowDataBound="gridViewPasswordPolicy_RowDataBound" OnSelectedIndexChanged="gridViewPasswordPolicy_SelectedIndexChanged"
+                            AutoGenerateSelectButton="true">
                             <EditRowStyle BackColor="#000FFF" />
                             <SelectedRowStyle BackColor="#999999" ForeColor="white" />
                         </asp:GridView>
@@ -103,11 +116,11 @@
         </div>
 
         <!-- Modal Work Collection tabindex="-1"-->
-        <div class="modal fade" id="exampleModalCenter" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="exampleModalCenterX" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Work Collection</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitleX">Update Password Policy Entry</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -115,8 +128,8 @@
                     <div class="modal-body" style="overflow: hidden;">
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <div class="alert alert-danger alert-dismissible" role="alert" style="display: none" id="divAlertInPopup">
-                                    <asp:Label runat="server" ID="lblErrorMsgInPopup" Text=""></asp:Label>
+                                <div class="alert alert-danger alert-dismissible" role="alert" runat="server" visible="false"  id="divAlertInPopupX">
+                                    <asp:Label runat="server" ID="lblErrorInPopupX" Text=""></asp:Label>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -125,99 +138,40 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label class="h4">Add-Update Ploicy Settings</label>
+                                <label class="h5" runat="server" id="lblEntryTitleX"></label>
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="txtMinLenght">Minimum Lenght Required
+                            <div class="form-group col-md-4">
+                                <label for="txtDefaultValue">Default Value
                                     <label style="color: red">*</label>
                                 </label>
-                                <input type="text" id="txtMinLenght" runat="server" required="required" placeholder="Minimum Password Lenght" class="form-control" />
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="cmbRequiredDigit">Require Digit
-                                    <label style="color: red">*</label>
-                                </label>
-                                <asp:DropDownList CssClass="form-control" ID="cmbRequiredDigit" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbPenaltyType_SelectedIndexChanged">
-                                    <asp:ListItem Text="--Choose one--" Value="00" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="Yes" Value="1" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="No" Value="0" Enabled="false"> </asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="cmbRequiredDigit">Alphanumeric Required
-                                    <label style="color: red">*</label>
-                                </label>
-                                <asp:DropDownList CssClass="form-control" ID="cmbAlphaNumRequired" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbPenaltyType_SelectedIndexChanged">
-                                    <asp:ListItem Text="--Choose one--" Value="00" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="Yes" Value="1" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="No" Value="0" Enabled="false"> </asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="cmbUppercaseRequired">Uppercase Required
-                                    <label style="color: red">*</label>
-                                </label>
-                                <asp:DropDownList CssClass="form-control" ID="cmbUppercaseRequired" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbPenaltyType_SelectedIndexChanged">
-                                    <asp:ListItem Text="--Choose one--" Value="00" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="Yes" Value="1" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="No" Value="0" Enabled="false"> </asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="cmbRequiredDigit">Lowercase Required
-                                    <label style="color: red">*</label>
-                                </label>
-                                <asp:DropDownList CssClass="form-control" ID="DropDownList5" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbPenaltyType_SelectedIndexChanged">
-                                    <asp:ListItem Text="--Choose one--" Value="00" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="Yes" Value="1" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="No" Value="0" Enabled="false"> </asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="cmbRequiredDigit">Unique Character
-                                    <label style="color: red">*</label>
-                                </label>
-                                <asp:DropDownList CssClass="form-control" ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbPenaltyType_SelectedIndexChanged">
-                                    <asp:ListItem Text="--Choose one--" Value="00" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="Yes" Value="1" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="No" Value="0" Enabled="false"> </asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            
-                            <div class="form-group col-md-3">
-                                <label for="txtPasswordHistory">Enforce Password History
-                                    <label style="color: red">*</label>
-                                </label>
-                                <input type="text" id="txtPasswordHistory" runat="server" required="required" placeholder="Enforce Password History" class="form-control" />
+                                <input type="text" id="txtDefaultValue" runat="server" required="required" placeholder="Default Value" class="form-control" />
                             </div>
 
-                            <div class="form-group col-md-3">
-                                <label for="cmbRequiredDigit">Uppercase Required
+                            <div class="form-group col-md-4">
+                                <label for="txtPolicyValue">Policy Value
                                     <label style="color: red">*</label>
                                 </label>
-                                <asp:DropDownList CssClass="form-control" ID="DropDownList4" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbPenaltyType_SelectedIndexChanged">
-                                    <asp:ListItem Text="--Choose one--" Value="00" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="Yes" Value="1" Enabled="false"> </asp:ListItem>
-                                    <asp:ListItem Text="No" Value="0" Enabled="false"> </asp:ListItem>
+                                <input type="text" id="txtPolicyValue" runat="server" required="required" placeholder="Policy Value" class="form-control" />
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="cmbEnable">Enable
+                                    <label style="color: red">*</label>
+                                </label>
+                                <asp:DropDownList CssClass="form-control" ID="cmbEnable" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbRequiredDigit_SelectedIndexChanged">
+                                    <asp:ListItem Text="--choose one--" Value="00" Selected="True"> </asp:ListItem>
+                                    <asp:ListItem Text="Enable" Value="1"> </asp:ListItem>
+                                    <asp:ListItem Text="Disabled" Value="0"> </asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <div class="float-right">
-                                    <asp:Button runat="server" ID="Button1" Text="Save Policy Settings" CssClass="btn btn-primary" OnClick="btnSavePenalty_Click" />
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="btnSave" runat="server" class="btn btn-primary" onserverclick="btnSave_ServerClick">Save Policy Settings</button>
+                        <button type="button" id="btnUpdatePolicySettings" runat="server" class="btn btn-primary" onserverclick="btnUpdatePolicySettings_ServerClick">Update Policy Settings</button>
                     </div>
                 </div>
             </div>
@@ -225,15 +179,35 @@
         <!-- End Modal -->
 
     </form>
-
     <script type="text/javascript">
-        function ClosePopUp() {
-            $("#btnCancel").click(function () {
-                $("#exampleModalCenter").modal('hide');
+        //filtering function
+        function filterGrid(columnIndex, id) {
+            var filterText = $("#" + id).val().toLowerCase();
+
+            var cellText = "";
+            var cellTextSampleToCompare = "";
+
+            $("#<%=gridViewPasswordPolicy.ClientID%> tr:has(td)").each(function () {
+                cellText = $(this).find("td:eq(" + columnIndex + ")").text().toLowerCase();
+                cellText = $.trim(cellText);
+                cellTextSampleToCompare = cellText.includes(filterText); //.substring(0, filterText.length);
+
+                if (cellTextSampleToCompare == false) {
+                    $(this).css('display', 'none');
+                }
+                else {
+                    $(this).css('display', '');
+                }
             });
         }
+        
+        //Filter the gridview content by the search string
+        $(document).ready(function () {
+            $("#txtSearchPolicy").on("keyup", function () {
+                filterGrid(4, "txtSearchPolicy");
+            });
+        });
     </script>
-
 </body>
 </html>
 

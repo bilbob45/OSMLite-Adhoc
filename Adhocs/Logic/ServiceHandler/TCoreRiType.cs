@@ -27,27 +27,34 @@ namespace Adhocs.Logic.ServiceHandler
             _util = new Utility();
         }
 
-        public void GetAdjustmentRiType(DropDownList ddplist)
+        public List<TCoreRiTypeObject> GetAll()
+        {
+            return new List<TCoreRiTypeObject>();
+        }
+
+        public TCoreRiTypeObject Get(int ritypeid)
+        {
+            return new TCoreRiTypeObject();
+        }
+
+        public void BindReturnAdjustmentRiType(DropDownList ddplist)
         {
             string sqlQuery = String.Format("SELECT * FROM t_core_ri_type WHERE ri_type_code IN ('CB','NIB','DH')");
             _util.OptionBinder(ddplist, sqlQuery, new string[] { "description", "ri_type_id" });
         }
 
-        public void GetAllRiTypes(DropDownList ddplist)
+        public void BindAllRiTypes(DropDownList ddplist)
         {
             ddplist.Items.Clear();
             string sqlQuery = @"Select ri_type_id, description from t_core_ri_type";
-            //using (SqlCommand cmd = new SqlCommand(sqlQuery, DatabaseOps.OpenSqlConnection()))
-            //{
-            //    cmd.CommandType = CommandType.Text;
-            //    _resultTable = _databaseOperations.GetDataTable(cmd);
-
-            //    ddplist.DataSource = _resultTable;
-            //    ddplist.DataTextField = "description";
-            //    ddplist.DataValueField = "ri_type_id";
-            //    ddplist.DataBind();
-            //}
             _util.OptionBinder(ddplist, sqlQuery, new string[] {"description", "ri_type_id" });
+        }
+
+        public void BindAllRiTypes(DropDownList ddplist, string username)
+        {
+            ddplist.Items.Clear();
+            string sqlQuery = $@"select * from v_core_user_ri_type where user_name = '{username}'";
+            _util.OptionBinder(ddplist, sqlQuery, new string[] { "description", "ri_type_id" });
         }
 
         public List<String> GetTableSurfixByRIType(String bindingparameter)

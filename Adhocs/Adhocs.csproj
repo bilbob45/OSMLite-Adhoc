@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Adhocs</RootNamespace>
-    <AssemblyName>Adhocs</AssemblyName>
+    <AssemblyName>OSMLite.Adhoc</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -23,6 +23,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,23 +45,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ActiveQueryBuilder.Core, Version=3.5.24.1138, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <HintPath>..\packages\ActiveQueryBuilder.Core.3.5.24.1138\lib\net\ActiveQueryBuilder.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveQueryBuilder.EventMetadataProvider, Version=3.5.24.1138, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <HintPath>..\packages\ActiveQueryBuilder.Core.3.5.24.1138\lib\net\ActiveQueryBuilder.EventMetadataProvider.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveQueryBuilder.View, Version=3.5.24.1138, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <HintPath>..\packages\ActiveQueryBuilder.Web.WebForms.3.4.7.2\lib\net\ActiveQueryBuilder.View.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveQueryBuilder.Web.Server, Version=3.4.7.2, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <HintPath>..\packages\ActiveQueryBuilder.Web.WebForms.3.4.7.2\lib\net\ActiveQueryBuilder.Web.Server.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveQueryBuilder.Web.WebForms, Version=3.4.7.2, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <HintPath>..\packages\ActiveQueryBuilder.Web.WebForms.3.4.7.2\lib\net\ActiveQueryBuilder.Web.WebForms.dll</HintPath>
-    </Reference>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.7.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -68,6 +60,9 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -88,8 +83,8 @@
     <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=3.1.5.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.3.1.5\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Options, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Options.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
@@ -130,25 +125,65 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    <Reference Include="RestSharp, Version=106.11.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.11.4\lib\net452\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Security.Cryptography.Xml, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Xml.4.5.0\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
@@ -160,29 +195,36 @@
       <HintPath>..\packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
@@ -193,6 +235,8 @@
     <Content Include="assets\codemirror.min.js" />
     <Content Include="assets\jquery-2.2.4.min.js" />
     <Content Include="assets\jquery-ui.min.js" />
+    <Content Include="assets\jquery.dataTables.min.js" />
+    <Content Include="assets\jquery.validate.min.js" />
     <Content Include="assets\jqx-all.js" />
     <Content Include="assets\jqx.base.css" />
     <Content Include="assets\jsgrid-theme.min.css" />
@@ -206,15 +250,15 @@
     <Content Include="assets\react-data-grid.min.js" />
     <Content Include="assets\react-dom.min.js" />
     <Content Include="assets\react.min.js" />
+    <Content Include="assets\script\bootstrap-3.4.1.min.css" />
+    <Content Include="assets\script\bootstrap-3.4.1.min.js" />
     <Content Include="assets\script\bootstrap-datetimepicker.js" />
     <Content Include="assets\script\bootstrap.bundle.js" />
     <Content Include="assets\script\bootstrap.bundle.min.js" />
     <Content Include="assets\script\bootstrap.min.js" />
     <Content Include="assets\script\jquery-2.2.4.min.js" />
     <Content Include="assets\script\jquery-3.4.0.min.js" />
-    <Content Include="assets\script\jquery-ui.js" />
-    <Content Include="assets\script\jquery-ui.min.js" />
-    <Content Include="assets\script\popper.min.js" />
+    <Content Include="assets\script\jquery-3.5.1.min.js" />
     <Content Include="assets\script\WebForms\GridView.js" />
     <Content Include="assets\script\WebForms\TreeView.js" />
     <Content Include="assets\select2\css\select2.min.css" />
@@ -222,6 +266,8 @@
     <Content Include="assets\sql.min.js" />
     <Content Include="assets\style\bootstrap.min.css" />
     <Content Include="assets\style\jquery-ui.css" />
+    <Content Include="assets\style\jquery.dataTables.min.css" />
+    <Content Include="assets\style\jquery.mCustomScrollbar.min.css" />
     <Content Include="assets\themes_black-tie_jquery-ui.css" />
     <Content Include="audit.aspx" />
     <Content Include="Error\404.aspx" />
@@ -235,6 +281,8 @@
     <Content Include="penalty\npenalty.aspx" />
     <Content Include="penalty\vpenalty.aspx" />
     <Content Include="report-test.aspx" />
+    <Content Include="reports\reportviewer.aspx" />
+    <Content Include="reports\userreports.aspx" />
     <Content Include="returns\radjustment.aspx" />
     <Content Include="rules\radjustments.aspx" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
@@ -261,6 +309,7 @@
     <Content Include="assets\md\scss\_icons.scss" />
     <Content Include="assets\md\scss\_path.scss" />
     <Content Include="assets\md\scss\_variables.scss" />
+    <Content Include="OSMLite.Adhoc-Key.pfx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -300,9 +349,13 @@
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\_references.js" />
     <Content Include="Site.Master" />
+    <Content Include="smartclient\downloadrb.aspx" />
     <Content Include="SysManagement\pswdpolsettings.aspx" />
+    <Content Include="SysManagement\sharedmodal\passwordpolicymodal.ascx" />
+    <Content Include="SysManagement\sharedmodal\tokenconfirmation.ascx" />
     <Content Include="SysManagement\sysmanagement.aspx" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="wc\downloadwc.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -335,6 +388,266 @@
     <Compile Include="HelicaInsight\HelicaInsightSSOGen.aspx.designer.cs">
       <DependentUpon>HelicaInsightSSOGen.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\bvn.cs" />
+    <Compile Include="Infrastructure\bvntinmassg.cs" />
+    <Compile Include="Infrastructure\Column_Adjustment.cs" />
+    <Compile Include="Infrastructure\IRSAdhocContext.cs" />
+    <Compile Include="Infrastructure\metatada_mig.cs" />
+    <Compile Include="Infrastructure\tin.cs" />
+    <Compile Include="Infrastructure\t_account_category.cs" />
+    <Compile Include="Infrastructure\t_application_permissions.cs" />
+    <Compile Include="Infrastructure\t_application_roles.cs" />
+    <Compile Include="Infrastructure\t_application_users.cs" />
+    <Compile Include="Infrastructure\t_app_role_claim.cs" />
+    <Compile Include="Infrastructure\t_app_user_claim.cs" />
+    <Compile Include="Infrastructure\t_app_user_login.cs" />
+    <Compile Include="Infrastructure\t_app_user_role.cs" />
+    <Compile Include="Infrastructure\t_app_user_token.cs" />
+    <Compile Include="Infrastructure\t_calendar.cs" />
+    <Compile Include="Infrastructure\t_calendar_date.cs" />
+    <Compile Include="Infrastructure\t_calendar_detail.cs" />
+    <Compile Include="Infrastructure\t_calendar_period.cs" />
+    <Compile Include="Infrastructure\t_city.cs" />
+    <Compile Include="Infrastructure\t_core_comments_log.cs" />
+    <Compile Include="Infrastructure\t_core_consumer_complaints_ref_upload.cs" />
+    <Compile Include="Infrastructure\t_core_dept_members.cs" />
+    <Compile Include="Infrastructure\t_core_dept_unit.cs" />
+    <Compile Include="Infrastructure\t_core_regulating_institution.cs" />
+    <Compile Include="Infrastructure\t_core_reporting_institution.cs" />
+    <Compile Include="Infrastructure\t_core_reporting_institution_history.cs" />
+    <Compile Include="Infrastructure\t_core_ri_authorization_level.cs" />
+    <Compile Include="Infrastructure\t_core_ri_mapping.cs" />
+    <Compile Include="Infrastructure\t_core_ri_mapping_history.cs" />
+    <Compile Include="Infrastructure\t_core_ri_subtype.cs" />
+    <Compile Include="Infrastructure\t_core_ri_type.cs" />
+    <Compile Include="Infrastructure\t_core_ri_type_auth_level.cs" />
+    <Compile Include="Infrastructure\t_core_ri_type_auth_level_history.cs" />
+    <Compile Include="Infrastructure\t_core_ri_type_history.cs" />
+    <Compile Include="Infrastructure\t_core_users.cs" />
+    <Compile Include="Infrastructure\t_core_users_ext.cs" />
+    <Compile Include="Infrastructure\t_core_users_notification_preference.cs" />
+    <Compile Include="Infrastructure\t_core_users_password.cs" />
+    <Compile Include="Infrastructure\t_core_users_password_hist.cs" />
+    <Compile Include="Infrastructure\t_core_users_reactivation.cs" />
+    <Compile Include="Infrastructure\t_core_user_designation.cs" />
+    <Compile Include="Infrastructure\t_core_user_grade.cs" />
+    <Compile Include="Infrastructure\t_core_user_location.cs" />
+    <Compile Include="Infrastructure\t_country.cs" />
+    <Compile Include="Infrastructure\t_country_zone.cs" />
+    <Compile Include="Infrastructure\t_crsb_bic_codes.cs" />
+    <Compile Include="Infrastructure\t_crsb_msg_incoming.cs" />
+    <Compile Include="Infrastructure\t_crsb_msg_outgoing.cs" />
+    <Compile Include="Infrastructure\t_crsb_msg_source.cs" />
+    <Compile Include="Infrastructure\t_crsb_msg_type.cs" />
+    <Compile Include="Infrastructure\t_currency_code.cs" />
+    <Compile Include="Infrastructure\t_currency_grouping.cs" />
+    <Compile Include="Infrastructure\t_currency_group_definition.cs" />
+    <Compile Include="Infrastructure\t_currency_rate.cs" />
+    <Compile Include="Infrastructure\t_currency_rate_type.cs" />
+    <Compile Include="Infrastructure\t_currency_type.cs" />
+    <Compile Include="Infrastructure\t_datetime_format.cs" />
+    <Compile Include="Infrastructure\t_db_name_defn.cs" />
+    <Compile Include="Infrastructure\t_db_query_group.cs" />
+    <Compile Include="Infrastructure\t_db_query_group_member.cs" />
+    <Compile Include="Infrastructure\t_db_query_group_schema_mapping.cs" />
+    <Compile Include="Infrastructure\t_db_query_script.cs" />
+    <Compile Include="Infrastructure\t_db_query_user_table_column.cs" />
+    <Compile Include="Infrastructure\t_db_schema_defn.cs" />
+    <Compile Include="Infrastructure\t_db_schema_defn_mig.cs" />
+    <Compile Include="Infrastructure\t_db_schema_mapping.cs" />
+    <Compile Include="Infrastructure\t_db_schema_mapping_mig.cs" />
+    <Compile Include="Infrastructure\t_dis_eod_process_dates.cs" />
+    <Compile Include="Infrastructure\t_dis_gl_type.cs" />
+    <Compile Include="Infrastructure\t_dis_returns.cs" />
+    <Compile Include="Infrastructure\t_dis_returns_details.cs" />
+    <Compile Include="Infrastructure\t_dis_ri_conn_param.cs" />
+    <Compile Include="Infrastructure\t_dis_ri_eod_date.cs" />
+    <Compile Include="Infrastructure\t_dis_ri_gl_code_mapping.cs" />
+    <Compile Include="Infrastructure\t_dis_ri_gl_code_mapping_upload.cs" />
+    <Compile Include="Infrastructure\t_dis_ri_gl_code_mapping_upload_instance.cs" />
+    <Compile Include="Infrastructure\t_dis_ri_gl_code_mapping_upload_validation.cs" />
+    <Compile Include="Infrastructure\t_dis_source_system.cs" />
+    <Compile Include="Infrastructure\t_dis_source_system_balance.cs" />
+    <Compile Include="Infrastructure\t_dis_source_system_balance_history.cs" />
+    <Compile Include="Infrastructure\t_dis_source_system_gl_type_mapping.cs" />
+    <Compile Include="Infrastructure\t_dis_source_system_query.cs" />
+    <Compile Include="Infrastructure\t_dis_submission_item_code_mapping.cs" />
+    <Compile Include="Infrastructure\t_dis_submission_reference_calc.cs" />
+    <Compile Include="Infrastructure\t_entity.cs" />
+    <Compile Include="Infrastructure\t_fsp_rpt_rs_custom_palette_colors.cs" />
+    <Compile Include="Infrastructure\t_fsp_rpt_rs_image.cs" />
+    <Compile Include="Infrastructure\t_fsp_rpt_rs_object_type.cs" />
+    <Compile Include="Infrastructure\t_fsp_rpt_rs_style.cs" />
+    <Compile Include="Infrastructure\t_fsp_rpt_rs_stylesheet.cs" />
+    <Compile Include="Infrastructure\t_lga_code.cs" />
+    <Compile Include="Infrastructure\t_lkup_business_month_convention.cs" />
+    <Compile Include="Infrastructure\t_lkup_comments_type.cs" />
+    <Compile Include="Infrastructure\t_lkup_computation_rule_exec_status.cs" />
+    <Compile Include="Infrastructure\t_lkup_consumer_complaints_categories.cs" />
+    <Compile Include="Infrastructure\t_lkup_consumer_complaints_subcategories.cs" />
+    <Compile Include="Infrastructure\t_lkup_contravention_type.cs" />
+    <Compile Include="Infrastructure\t_lkup_fems_book_code_type.cs" />
+    <Compile Include="Infrastructure\t_lkup_fems_book_code_type_values.cs" />
+    <Compile Include="Infrastructure\t_lkup_frequency.cs" />
+    <Compile Include="Infrastructure\t_lkup_penalty_type.cs" />
+    <Compile Include="Infrastructure\t_lkup_questionnaire_type.cs" />
+    <Compile Include="Infrastructure\t_lkup_wc_schedule_status.cs" />
+    <Compile Include="Infrastructure\t_lkup_wc_submission_status.cs" />
+    <Compile Include="Infrastructure\t_msg_attachment.cs" />
+    <Compile Include="Infrastructure\t_msg_delivery_method.cs" />
+    <Compile Include="Infrastructure\t_msg_history.cs" />
+    <Compile Include="Infrastructure\t_msg_log.cs" />
+    <Compile Include="Infrastructure\t_msg_module.cs" />
+    <Compile Include="Infrastructure\t_msg_subtype.cs" />
+    <Compile Include="Infrastructure\t_msg_template.cs" />
+    <Compile Include="Infrastructure\t_msg_type.cs" />
+    <Compile Include="Infrastructure\t_ose_exam_document.cs" />
+    <Compile Include="Infrastructure\t_ose_exam_returns_mapping.cs" />
+    <Compile Include="Infrastructure\t_ose_exam_type.cs" />
+    <Compile Include="Infrastructure\t_ose_exam_type_document_mapping.cs" />
+    <Compile Include="Infrastructure\t_ose_questn.cs" />
+    <Compile Include="Infrastructure\t_pnt_penalty_definition.cs" />
+    <Compile Include="Infrastructure\t_pnt_penalty_formula.cs" />
+    <Compile Include="Infrastructure\t_pnt_penalty_work_collection_mapping.cs" />
+    <Compile Include="Infrastructure\t_rb_artifact.cs" />
+    <Compile Include="Infrastructure\t_rb_artifact_mig.cs" />
+    <Compile Include="Infrastructure\t_rb_assertion_complex_operand.cs" />
+    <Compile Include="Infrastructure\t_rb_assertion_operand.cs" />
+    <Compile Include="Infrastructure\t_rb_assertion_operand_history.cs" />
+    <Compile Include="Infrastructure\t_rb_assertion_rule.cs" />
+    <Compile Include="Infrastructure\t_rb_assertion_rule_bk.cs" />
+    <Compile Include="Infrastructure\t_rb_assertion_rule_dependency_for_intra.cs" />
+    <Compile Include="Infrastructure\t_rb_assertion_rule_history.cs" />
+    <Compile Include="Infrastructure\t_rb_assertion_rule_set.cs" />
+    <Compile Include="Infrastructure\t_rb_assertion_rule_set_history.cs" />
+    <Compile Include="Infrastructure\t_rb_assertion_rule_try1.cs" />
+    <Compile Include="Infrastructure\t_rb_datasize.cs" />
+    <Compile Include="Infrastructure\t_rb_datatype.cs" />
+    <Compile Include="Infrastructure\t_rb_extraction_info.cs" />
+    <Compile Include="Infrastructure\t_rb_extraction_info_mig.cs" />
+    <Compile Include="Infrastructure\t_rb_metadata.cs" />
+    <Compile Include="Infrastructure\t_rb_metadata_dup.cs" />
+    <Compile Include="Infrastructure\t_rb_metadata_mig.cs" />
+    <Compile Include="Infrastructure\t_rb_modification_type.cs" />
+    <Compile Include="Infrastructure\t_rb_reason_deactivation.cs" />
+    <Compile Include="Infrastructure\t_rb_restricted_field.cs" />
+    <Compile Include="Infrastructure\t_rb_restricted_field_bkup.cs" />
+    <Compile Include="Infrastructure\t_rb_restricted_field_history.cs" />
+    <Compile Include="Infrastructure\t_rb_restriction_codes.cs" />
+    <Compile Include="Infrastructure\t_rb_restriction_data.cs" />
+    <Compile Include="Infrastructure\t_rb_restriction_type.cs" />
+    <Compile Include="Infrastructure\t_rb_rest_bvn_tin_mapping.cs" />
+    <Compile Include="Infrastructure\t_rb_retrun_matrix_status.cs" />
+    <Compile Include="Infrastructure\t_rb_returns_matrix.cs" />
+    <Compile Include="Infrastructure\t_rb_template_type.cs" />
+    <Compile Include="Infrastructure\t_rpt_bank_rating_composite_score.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_bank_rating_scoring.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_bank_rating_setup.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rulebase.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rulemakeup.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rulemakeup_formula.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rulemakeup_formula_dapo.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rulemakeup_formula_qadri.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_adjustment.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_adjustment_table.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_dependency.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_frequency.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_level.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_metadata.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_metadata_rule_mapping.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_operator.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_recalc_trigger.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_ri_type_mapping.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_run_status.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_type.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_rule_var.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_user_var.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_value.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_value_cmb000.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_value_simple.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_value_table.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_value_table_.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_value_table_history.cs" />
+    <Compile Include="Infrastructure\t_rpt_computation_value_table_temp.cs" />
+    <Compile Include="Infrastructure\t_rpt_contravention_valuation.cs" />
+    <Compile Include="Infrastructure\t_rpt_custom_codes.cs" />
+    <Compile Include="Infrastructure\t_rpt_group.cs" />
+    <Compile Include="Infrastructure\t_rpt_group_members.cs" />
+    <Compile Include="Infrastructure\t_rpt_liquidity_stress_test.cs" />
+    <Compile Include="Infrastructure\t_rpt_liq_stress_test_data_defn.cs" />
+    <Compile Include="Infrastructure\t_rpt_liq_stress_test_data_reference_calc.cs" />
+    <Compile Include="Infrastructure\t_rpt_liq_stress_test_scoring.cs" />
+    <Compile Include="Infrastructure\t_rpt_report.cs" />
+    <Compile Include="Infrastructure\t_rpt_report_config.cs" />
+    <Compile Include="Infrastructure\t_rpt_report_group.cs" />
+    <Compile Include="Infrastructure\t_rtn_consumer_complaints_defn.cs" />
+    <Compile Include="Infrastructure\t_rtn_consumer_complaints_valuations.cs" />
+    <Compile Include="Infrastructure\t_rtn_detailed_imf_srf_cmb.cs" />
+    <Compile Include="Infrastructure\t_rtn_detailed_imf_srf_ins.cs" />
+    <Compile Include="Infrastructure\t_rtn_detailed_imf_srf_mfb.cs" />
+    <Compile Include="Infrastructure\t_rtn_detailed_imf_srf_nib.cs" />
+    <Compile Include="Infrastructure\t_rtn_detailed_imf_srf_pen.cs" />
+    <Compile Include="Infrastructure\t_rtn_detailed_imf_srf_pmb.cs" />
+    <Compile Include="Infrastructure\t_rtn_imf_srf_report_code_ri_type_mapping.cs" />
+    <Compile Include="Infrastructure\t_rtn_imf_srf_report_item_code_defn.cs" />
+    <Compile Include="Infrastructure\t_rtn_imf_srf_report_item_code_reference_calc.cs" />
+    <Compile Include="Infrastructure\t_rtn_processing_exceptions.cs" />
+    <Compile Include="Infrastructure\t_rtn_rb_bvn_tin.cs" />
+    <Compile Include="Infrastructure\t_rtn_rb_tin.cs" />
+    <Compile Include="Infrastructure\t_rtn_reporting_job.cs" />
+    <Compile Include="Infrastructure\t_rtn_returns.cs" />
+    <Compile Include="Infrastructure\t_rtn_returns_dept_mapping.cs" />
+    <Compile Include="Infrastructure\t_rtn_returns_details.cs" />
+    <Compile Include="Infrastructure\t_rtn_returns_mig.cs" />
+    <Compile Include="Infrastructure\t_rtn_returns_work_collection_mapping.cs" />
+    <Compile Include="Infrastructure\t_rtn_returns_work_collection_mapping_mig.cs" />
+    <Compile Include="Infrastructure\t_rtn_static_returns_content_mapping.cs" />
+    <Compile Include="Infrastructure\t_rtn_static_returns_content_mapping_20200623.cs" />
+    <Compile Include="Infrastructure\t_rtn_static_returns_content_mapping_backup.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_defn.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_defn_mig.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_defn_optn.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_defn_test.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_mapping.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_mapping_mig.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_partial_acc.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_schedule.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_submission.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_submission_optn.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_submission_partial_acc.cs" />
+    <Compile Include="Infrastructure\t_rtn_work_collection_submission_validation.cs" />
+    <Compile Include="Infrastructure\t_sct_db_changes.cs" />
+    <Compile Include="Infrastructure\t_sct_db_changes_code_type.cs" />
+    <Compile Include="Infrastructure\t_sct_db_changes_status.cs" />
+    <Compile Include="Infrastructure\t_sct_db_changes_type.cs" />
+    <Compile Include="Infrastructure\t_sct_file_packager.cs" />
+    <Compile Include="Infrastructure\t_sct_info.cs" />
+    <Compile Include="Infrastructure\t_sct_ri_info.cs" />
+    <Compile Include="Infrastructure\t_sct_type_download.cs" />
+    <Compile Include="Infrastructure\t_sct_type_download_count.cs" />
+    <Compile Include="Infrastructure\t_sct_webservice_url.cs" />
+    <Compile Include="Infrastructure\t_sec_active_directory_integration.cs" />
+    <Compile Include="Infrastructure\t_sec_win_service.cs" />
+    <Compile Include="Infrastructure\t_state.cs" />
+    <Compile Include="Infrastructure\t_sys_configuration_irs.cs" />
+    <Compile Include="Infrastructure\t_time_unit.cs" />
+    <Compile Include="Infrastructure\t_val_severity_level.cs" />
+    <Compile Include="Infrastructure\t_workflow.cs" />
+    <Compile Include="Infrastructure\t_workflow_action.cs" />
+    <Compile Include="Infrastructure\t_workflow_action_type.cs" />
+    <Compile Include="Infrastructure\t_workflow_group.cs" />
+    <Compile Include="Infrastructure\t_workflow_group_level.cs" />
+    <Compile Include="Infrastructure\t_workflow_group_level_transition.cs" />
+    <Compile Include="Infrastructure\t_workflow_group_member.cs" />
+    <Compile Include="Infrastructure\t_workflow_module.cs" />
+    <Compile Include="Infrastructure\t_workflow_request.cs" />
+    <Compile Include="Infrastructure\t_workflow_request_action.cs" />
+    <Compile Include="Infrastructure\t_workflow_request_event_history.cs" />
+    <Compile Include="Infrastructure\t_workflow_request_file.cs" />
+    <Compile Include="Infrastructure\t_workflow_request_ose_ext.cs" />
+    <Compile Include="Infrastructure\t_workflow_state_type.cs" />
     <Compile Include="Logic\DatabaseHandler\SqlHelper.cs" />
     <Compile Include="Logic\Infrastructure\AlertUtility.cs" />
     <Compile Include="Logic\Infrastructure\BasePage.cs">
@@ -361,6 +674,7 @@
     <Compile Include="Logic\Object\TRPTComputationValueTableObject.cs" />
     <Compile Include="Logic\Object\TRPTLiqStressTestDataDefnObject.cs" />
     <Compile Include="Logic\Object\TRPTLiqStressTestScoringObject.cs" />
+    <Compile Include="Logic\Object\TRTNBuilderUploadObject.cs" />
     <Compile Include="Logic\Object\TRTNReturnsWorkCollectionMappingObject.cs" />
     <Compile Include="Logic\Object\TRTNWorkCollectionScheduleObject.cs" />
     <Compile Include="Logic\Object\TSysConfigurationIrsObject.cs" />
@@ -379,6 +693,7 @@
     <Compile Include="Logic\ServiceHandler\ReportGroupMember.cs" />
     <Compile Include="Logic\ServiceHandler\ReportInGroup.cs" />
     <Compile Include="Logic\ServiceHandler\Reports.cs" />
+    <Compile Include="Logic\ServiceHandler\ResponseHandler.cs" />
     <Compile Include="Logic\ServiceHandler\RuleVarianceAdjustment.cs" />
     <Compile Include="Logic\ServiceHandler\ServiceBaseHandler.cs" />
     <Compile Include="Logic\ServiceHandler\SubmissionReferenceCalc.cs" />
@@ -392,6 +707,7 @@
     <Compile Include="Logic\ServiceHandler\TRPTComputationValueTableHandler.cs" />
     <Compile Include="Logic\ServiceHandler\TRPTLiqStressTestDataDefnHandler.cs" />
     <Compile Include="Logic\ServiceHandler\TRPTLiqStressTestScoringHandler.cs" />
+    <Compile Include="Logic\ServiceHandler\TRTNBuilderUploadHandler.cs" />
     <Compile Include="Logic\ServiceHandler\TRTNWorkCollectionScheduleHandler.cs" />
     <Compile Include="Logic\ServiceHandler\TSysConfigurationIrsHandler.cs" />
     <Compile Include="Logic\ServiceHandler\VRTNWorkCollectionHandler.cs" />
@@ -444,6 +760,18 @@
     <Compile Include="report-test.aspx.designer.cs">
       <DependentUpon>report-test.aspx</DependentUpon>
     </Compile>
+    <Compile Include="reports\reportviewer.aspx.cs">
+      <DependentUpon>reportviewer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="reports\reportviewer.aspx.designer.cs">
+      <DependentUpon>reportviewer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="reports\userreports.aspx.cs">
+      <DependentUpon>userreports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="reports\userreports.aspx.designer.cs">
+      <DependentUpon>userreports.aspx</DependentUpon>
+    </Compile>
     <Compile Include="returns\radjustment.aspx.cs">
       <DependentUpon>radjustment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -472,12 +800,33 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="smartclient\downloadrb.aspx.cs">
+      <DependentUpon>downloadrb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="smartclient\downloadrb.aspx.designer.cs">
+      <DependentUpon>downloadrb.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SysManagement\pswdpolsettings.aspx.cs">
       <DependentUpon>pswdpolsettings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SysManagement\pswdpolsettings.aspx.designer.cs">
       <DependentUpon>pswdpolsettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysManagement\sharedmodal\passwordpolicymodal.ascx.cs">
+      <DependentUpon>passwordpolicymodal.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysManagement\sharedmodal\passwordpolicymodal.ascx.designer.cs">
+      <DependentUpon>passwordpolicymodal.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="SysManagement\sharedmodal\tokenconfirmation.ascx.cs">
+      <DependentUpon>tokenconfirmation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysManagement\sharedmodal\tokenconfirmation.ascx.designer.cs">
+      <DependentUpon>tokenconfirmation.ascx</DependentUpon>
     </Compile>
     <Compile Include="SysManagement\sysmanagement.aspx.cs">
       <DependentUpon>sysmanagement.aspx</DependentUpon>
@@ -508,6 +857,13 @@
     </Compile>
     <Compile Include="Helpers\DataBaseHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="wc\downloadwc.aspx.cs">
+      <DependentUpon>downloadwc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wc\downloadwc.aspx.designer.cs">
+      <DependentUpon>downloadwc.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -527,6 +883,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>OSMLite.Adhoc-Key.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

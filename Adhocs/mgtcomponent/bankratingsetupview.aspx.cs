@@ -101,5 +101,13 @@ namespace Adhocs.mgtcomponent
                 LogUtitlity.LogToText(ex.ToString());
             }
         }
+
+        protected void gridViewBankRatingSetup_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                e.Row.TableSection = TableRowSection.TableHeader;
+            }
+        }
     }
 }
