@@ -38,11 +38,12 @@ namespace Adhocs.penalty
                     this.frmPenalty.Visible = false;
                 }
 
-                if (!Page.IsPostBack)
-                {
-                    this.gridViewPenalties.DataSource = new Penalties().ListPenalties();
-                    this.gridViewPenalties.DataBind();
-                }
+                //Commented on January 11 - 2021
+                //if (!Page.IsPostBack)
+                //{
+                //    this.gridViewPenalties.DataSource = new Penalties().ListPenalties();
+                //    this.gridViewPenalties.DataBind();
+                //}
             }
             catch (Exception ex)
             {
@@ -51,46 +52,75 @@ namespace Adhocs.penalty
             }
         }
 
+        public IQueryable gridViewPenalties_GetData()
+        {
+            var dbContext = new IRSAdhocContext();
+            var query = (from pdefn in dbContext.t_pnt_penalty_definition join ritype in dbContext.t_core_ri_type on pdefn.ri_type_id equals ritype.ri_type_id
+                     join lkupptype in dbContext.t_lkup_penalty_type on pdefn.penalty_type equals lkupptype.penalty_type 
+                     join lkupfreq in dbContext.t_lkup_frequency on pdefn.frequency equals lkupfreq.freq_unit
+                orderby pdefn.created_date descending
+                         select new
+                     {
+                         PenaltyCode = pdefn.penalty_code,
+                         Description = pdefn.penalty_desc,
+                         ReturnInstitution = ritype.description,
+                         Type = lkupptype.description,
+                         Frequency = lkupfreq.freq_desc,
+                         FrequnitUnit = pdefn.penalty_freq_unit,
+                         EndValidityDate = (pdefn.end_validity_date != null) ? pdefn.end_validity_date : DateTime.MaxValue
+                     });
+
+            return query;
+        }
+
         [WebMethod]
         public static object GetPenaltyDetails(string pcode)
         {
             var response = new ResponseHandler();
-            object query;
 
+            if(pcode == null || pcode == string.Empty)
+            {
+                response.Status = 0;
+                response.Message = "Invalid penalty or penalty code can not be found";
+                return response;
+            }
+
+            object query;
             var dbContext = new IRSAdhocContext();
 
-            //query = dbContext.t_pnt_penalty_definition.Where(code => code.penalty_code == pcode)
-            //    .Join(dbContext.t_core_ri_type)
-            //    .Select(x => new {
-            //    pcode = x.penalty_code,
-            //    pdescription = x.penalty_desc,
-            //    rtype = x.ri_type_id
-            //}).FirstOrDefault();
+            query = dbContext.t_pnt_penalty_definition.Where(xpcode => xpcode.penalty_code == pcode).FirstOrDefault();
 
-            query = (from pdefn in dbContext.t_pnt_penalty_definition
-                     join ritype in dbContext.t_core_ri_type
-                        on pdefn.ri_type_id equals ritype.ri_type_id 
-                        join lkupptype in dbContext.t_lkup_penalty_type 
-                        on pdefn.penalty_type equals lkupptype.penalty_type
-                        join lkupfreq in dbContext.t_lkup_frequency
-                        on pdefn.frequency equals lkupfreq.freq_unit
-                     select new
-                     {
-                         pcode = pdefn.penalty_code,
-                         pdescription = pdefn.penalty_desc,
-                         ritypedesc = ritype.description,
-                         type = lkupptype.description,
-                         freq = lkupfreq.freq_desc,
-                         frequnit = pdefn.penalty_freq_unit,
-                         dday = pdefn.delivery_deadline_day,
-                         dhour = pdefn.delivery_deadline_hr,
-                         dmin = pdefn.delivery_deadline_min,
-                         plimit = pdefn.min_limit_accepted,
-                         pvalue = pdefn.penalty_value,
-                         pstartval = pdefn.start_validity_date,
-                         pendtval = pdefn.end_validity_date,
-                     }).FirstOrDefault();
-            
+            if(query != null )
+            {
+                query = (from pdefn in dbContext.t_pnt_penalty_definition
+                         join ritype in dbContext.t_core_ri_type on pdefn.ri_type_id equals ritype.ri_type_id
+                         join lkupptype in dbContext.t_lkup_penalty_type on pdefn.penalty_type equals lkupptype.penalty_type
+                         join lkupfreq in dbContext.t_lkup_frequency on pdefn.frequency equals lkupfreq.freq_unit
+                         where pdefn.penalty_code == pcode
+                         select new
+                         {
+                             pcode = pdefn.penalty_code,
+                             pdescription = pdefn.penalty_desc,
+                             ritypedesc = ritype.description,
+                             type = lkupptype.description,
+                             freq = lkupfreq.freq_desc,
+                             frequnit = pdefn.penalty_freq_unit,
+                             dday = pdefn.delivery_deadline_day,
+                             dhour = pdefn.delivery_deadline_hr,
+                             dmin = pdefn.delivery_deadline_min,
+                             plimit = pdefn.min_limit_accepted,
+                             pvalue = pdefn.penalty_value,
+                             pstartval = pdefn.start_validity_date,
+                             pendtval = pdefn.end_validity_date,
+                         }).FirstOrDefault();
+
+            }
+            else
+            {
+                response.Status = 0;
+                response.Message = "The selected penalty details can not be found.";
+                return response;
+            }
 
             //if(query != null)
             //{
@@ -126,33 +156,6 @@ namespace Adhocs.penalty
             }
         }
 
-
-
-        protected void lblEditPenalty_ServerClick(object sender, EventArgs e)
-        {
-            var selectedPenalty = this.gridViewPenalties.SelectedRow;
-            if (selectedPenalty == null)
-                return;
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalViewPenalty();", true);
-
-                this.lblPenaltyCode.InnerText = selectedPenalty.Cells[1].Text.Trim();
-                this.lblPenaltyDescription.InnerText = selectedPenalty.Cells[2].Text.Trim();
-                this.lblRiType.InnerText = selectedPenalty.Cells[3].Text.Trim();
-                this.lblPenaltyType.InnerText = selectedPenalty.Cells[4].Text.Trim();
-                this.lblPenaltyFrequency.InnerText = selectedPenalty.Cells[5].Text.Trim();
-                this.lblPenaltyFrequencyUnit.InnerText = selectedPenalty.Cells[6].Text.Trim();
-                this.lblDeliveryDay.InnerText = selectedPenalty.Cells[7].Text.Trim();
-                this.lblDeliveryHour.InnerText = selectedPenalty.Cells[8].Text.Trim();
-                this.lblDeliveryMinute.InnerText = selectedPenalty.Cells[9].Text.Trim();
-                this.lblPenaltyLimit.InnerText = selectedPenalty.Cells[10].Text.Trim();
-                this.lblPenaltyvalue.InnerText = selectedPenalty.Cells[11].Text.Trim();
-                this.lblValidityStart.InnerText = selectedPenalty.Cells[12].Text.Trim();
-                this.lblValidityEnd.InnerText = selectedPenalty.Cells[13].Text.Trim();
-            }
-        }
-
         protected void gridViewPenalties_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             try
@@ -182,50 +185,77 @@ namespace Adhocs.penalty
             }
         }
 
-        protected void btnView_ServerClick(object sender, EventArgs e)
-        {
-            try
-            {
-                HtmlButton btn = (HtmlButton)sender;
+        #region commented on January 11 2021
+        //protected void btnView_ServerClick(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        HtmlButton btn = (HtmlButton)sender;
 
-                //Get the row that contains this button
-                GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+        //        //Get the row that contains this button
+        //        GridViewRow gvr = (GridViewRow)btn.NamingContainer;
 
-                int _rowIndex = ((GridViewRow)((Control)sender).NamingContainer).RowIndex;
-                Session["rowindex"] = _rowIndex;
-                GridViewRow selectedPenalty = gvr;
+        //        int _rowIndex = ((GridViewRow)((Control)sender).NamingContainer).RowIndex;
+        //        Session["rowindex"] = _rowIndex;
+        //        GridViewRow selectedPenalty = gvr;
 
-                if (selectedPenalty == null)
-                    return;
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalViewPenalty();", true);
+        //        if (selectedPenalty == null)
+        //            return;
+        //        else
+        //        {
+        //            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalViewPenalty();", true);
 
-                    this.lblPenaltyCode.InnerText = selectedPenalty.Cells[1].Text.Trim();
-                    this.lblPenaltyDescription.InnerText = selectedPenalty.Cells[2].Text.Trim();
-                    this.lblRiType.InnerText = selectedPenalty.Cells[3].Text.Trim();
-                    this.lblPenaltyType.InnerText = selectedPenalty.Cells[4].Text.Trim();
-                    this.lblPenaltyFrequency.InnerText = selectedPenalty.Cells[5].Text.Trim();
-                    this.lblPenaltyFrequencyUnit.InnerText = selectedPenalty.Cells[6].Text.Trim();
-                    this.lblDeliveryDay.InnerText = selectedPenalty.Cells[7].Text.Trim();
-                    this.lblDeliveryHour.InnerText = selectedPenalty.Cells[8].Text.Trim();
-                    this.lblDeliveryMinute.InnerText = selectedPenalty.Cells[9].Text.Trim();
-                    this.lblPenaltyLimit.InnerText = selectedPenalty.Cells[10].Text.Trim();
-                    this.lblPenaltyvalue.InnerText = selectedPenalty.Cells[11].Text.Trim();
-                    this.lblValidityStart.InnerText = selectedPenalty.Cells[12].Text.Trim();
-                    this.lblValidityEnd.InnerText = selectedPenalty.Cells[13].Text.Trim();
-                }
+        //            this.lblPenaltyCode.InnerText = selectedPenalty.Cells[1].Text.Trim();
+        //            this.lblPenaltyDescription.InnerText = selectedPenalty.Cells[2].Text.Trim();
+        //            this.lblRiType.InnerText = selectedPenalty.Cells[3].Text.Trim();
+        //            this.lblPenaltyType.InnerText = selectedPenalty.Cells[4].Text.Trim();
+        //            this.lblPenaltyFrequency.InnerText = selectedPenalty.Cells[5].Text.Trim();
+        //            this.lblPenaltyFrequencyUnit.InnerText = selectedPenalty.Cells[6].Text.Trim();
+        //            this.lblDeliveryDay.InnerText = selectedPenalty.Cells[7].Text.Trim();
+        //            this.lblDeliveryHour.InnerText = selectedPenalty.Cells[8].Text.Trim();
+        //            this.lblDeliveryMinute.InnerText = selectedPenalty.Cells[9].Text.Trim();
+        //            this.lblPenaltyLimit.InnerText = selectedPenalty.Cells[10].Text.Trim();
+        //            this.lblPenaltyvalue.InnerText = selectedPenalty.Cells[11].Text.Trim();
+        //            this.lblValidityStart.InnerText = selectedPenalty.Cells[12].Text.Trim();
+        //            this.lblValidityEnd.InnerText = selectedPenalty.Cells[13].Text.Trim();
+        //        }
 
-                //get the leave id
-                //int leaveId = Convert.ToInt32(this.gridViewPenalties.Rows[_rowIndex].Cells[1].Text);
+        //        //get the leave id
+        //        //int leaveId = Convert.ToInt32(this.gridViewPenalties.Rows[_rowIndex].Cells[1].Text);
 
-                //get the staff identification number
-                //string employeeId = this.gridViewPenalties.Rows[_rowIndex].Cells[2].Text;
-            }
-            catch (Exception ex)
-            {
-                Trace.Write(ex.ToString());
-            }
-        }
+        //        //get the staff identification number
+        //        //string employeeId = this.gridViewPenalties.Rows[_rowIndex].Cells[2].Text;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Trace.Write(ex.ToString());
+        //    }
+        //}
+
+        //protected void lblEditPenalty_ServerClick(object sender, EventArgs e)
+        //{
+        //    var selectedPenalty = this.gridViewPenalties.SelectedRow;
+        //    if (selectedPenalty == null)
+        //        return;
+        //    else
+        //    {
+        //        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalViewPenalty();", true);
+
+        //        this.lblPenaltyCode.InnerText = selectedPenalty.Cells[1].Text.Trim();
+        //        this.lblPenaltyDescription.InnerText = selectedPenalty.Cells[2].Text.Trim();
+        //        this.lblRiType.InnerText = selectedPenalty.Cells[3].Text.Trim();
+        //        this.lblPenaltyType.InnerText = selectedPenalty.Cells[4].Text.Trim();
+        //        this.lblPenaltyFrequency.InnerText = selectedPenalty.Cells[5].Text.Trim();
+        //        this.lblPenaltyFrequencyUnit.InnerText = selectedPenalty.Cells[6].Text.Trim();
+        //        this.lblDeliveryDay.InnerText = selectedPenalty.Cells[7].Text.Trim();
+        //        this.lblDeliveryHour.InnerText = selectedPenalty.Cells[8].Text.Trim();
+        //        this.lblDeliveryMinute.InnerText = selectedPenalty.Cells[9].Text.Trim();
+        //        this.lblPenaltyLimit.InnerText = selectedPenalty.Cells[10].Text.Trim();
+        //        this.lblPenaltyvalue.InnerText = selectedPenalty.Cells[11].Text.Trim();
+        //        this.lblValidityStart.InnerText = selectedPenalty.Cells[12].Text.Trim();
+        //        this.lblValidityEnd.InnerText = selectedPenalty.Cells[13].Text.Trim();
+        //    }
+        //}
+        #endregion
     }
 }

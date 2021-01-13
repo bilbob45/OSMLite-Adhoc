@@ -9,6 +9,7 @@ using Adhocs.Logic.DatabaseHandler;
 using Adhocs.Logic.ServiceHandler;
 using System.ComponentModel.DataAnnotations;
 using System.Transactions;
+using Adhocs.Infrastructure;
 
 namespace Adhocs.Logic.ServiceHandler
 {
@@ -156,6 +157,29 @@ namespace Adhocs.Logic.ServiceHandler
             }
         }
 
+        public int Save(t_pnt_penalty_definition penaltymodel, PenaltyWorkCollectionModel penaltyWCModel = null)
+        {
+            using(var dbContext = new IRSAdhocContext())
+            {
+                using (var tranx = dbContext.Database.BeginTransaction())
+                {
+                    var query = dbContext.t_pnt_penalty_definition.Find("", "");
+                    if (query != null)
+                    {
+                        dbContext.Entry(query).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    else
+                    {
+                        dbContext.t_pnt_penalty_definition.Add(penaltymodel);
+                    }
+
+                    tranx.Commit();
+                }
+            }
+
+            return 1;
+        }
+
         public int SavePenalty(PenaltiesModel penaltymodel, PenaltyWorkCollectionModel penaltyWCModel = null)
         {
             //penalty_limit, ,@penalty_limit
@@ -203,12 +227,12 @@ namespace Adhocs.Logic.ServiceHandler
                         command.Parameters.Add("@delivery_deadline_min", penaltymodel.delivery_deadline_min);
                     #endregion
 
-                    if (String.IsNullOrWhiteSpace(penaltymodel.min_limit_accepted))
+                    if (penaltymodel.min_limit_accepted == decimal.MinValue)
                         command.Parameters.AddWithValue("@min_limit_accepted", penaltymodel.min_limit_accepted);
                     else
                         command.Parameters.Add("@min_limit_accepted", penaltymodel.min_limit_accepted);
 
-                    if (String.IsNullOrWhiteSpace(penaltymodel.max_limit_accepted))
+                    if (penaltymodel.max_limit_accepted == decimal.MinValue)
                         command.Parameters.AddWithValue("@max_limit_accepted", penaltymodel.max_limit_accepted);
                     else
                         command.Parameters.Add("@max_limit_accepted", penaltymodel.max_limit_accepted);
@@ -307,9 +331,9 @@ namespace Adhocs.Logic.ServiceHandler
 
         public Int32? delivery_deadline_min { get; set; }
 
-        public String min_limit_accepted { get; set; } = null;
+        public decimal min_limit_accepted { get; set; } = 0;
 
-        public String max_limit_accepted { get; set; } = null;
+        public decimal max_limit_accepted { get; set; } = 0;
 
         [Required]
         public Boolean penalty_per_unit { get; set; } = false;

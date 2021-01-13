@@ -99,14 +99,14 @@
                             Choose Action</button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonQuery">
                             <a class="dropdown-item" runat="server" id="lblAddNewPenalty" href="#" onserverclick="lblAddNewPenalty_ServerClick">Add New Penalty</a>
-                            <a class="dropdown-item" runat="server" id="lblEditPenalty" href="#" onserverclick="lblEditPenalty_ServerClick">View Penalty Details</a>
+                            <a class="dropdown-item" runat="server" id="lblEditPenalty" href="#">View Penalty Details</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group col-md-12">
                     <asp:GridView ID="gridViewPenalties"
-                            runat="server"
+                            runat="server" SelectMethod="gridViewPenalties_GetData"
                             HeaderStyle-Wrap="false"
                             RowStyle-Wrap="true"
                             EmptyDataText="There is no report(s) to display for the selected department"
@@ -116,7 +116,7 @@
                             AutoGenerateSelectButton="False" OnRowDataBound="gridViewPenalties_RowDataBound">
                             <EditRowStyle BackColor="#000FFF" />
                             <SelectedRowStyle BackColor="#999999" ForeColor="white" />
-                        <Columns>
+                        <%--<Columns>
                         <asp:TemplateField AccessibleHeaderText="Action">
                             <HeaderTemplate>
                                 <span></span>
@@ -127,7 +127,7 @@
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
-                    </Columns>
+                    </Columns>--%>
                         </asp:GridView>
                 </div>
         </div>
@@ -330,7 +330,13 @@
 
             var table = $('#gridViewPenalties').DataTable();
             $(document).on('click', '#<%= gridViewPenalties.ClientID %> tr', function (e) {
-                var pcode = table.row(this).data()[2];
+
+                var pcode = table.row(this).data()[0];
+
+                if (pcode == undefined)
+                    return;
+
+                //alert(pcode);
 
                 var data = {
                     pcode : pcode
@@ -344,44 +350,31 @@
                     data: JSON.stringify(data),
                     success: function (response) {
 
-                        responseData = (response.d !== null || response.d !== undefined) ? response.d : response;
+                        responseData = (response.d !== null || response.d !== undefined) ? response.d : response
 
-                        console.log("Success");
                         console.log(responseData);
 
-                        $("#lblPenaltyCode").html(responseData.pcode);
-                        $("#lblPenaltyDescription").html(responseData.pdescription);
-                        $("#lblRiType").html(responseData.ritypedesc);
-                        $("#lblPenaltyType").html(responseData.type);
-                        $("#lblPenaltyFrequency").html(responseData.freq);
-                        $("#lblPenaltyFrequencyUnit").html(responseData.frequnit);
+                        $("#lblPenaltyCode").empty().html(responseData.pcode);
+                        $("#lblPenaltyDescription").empty().html(responseData.pdescription);
+                        $("#lblRiType").empty().html(responseData.ritypedesc);
+                        $("#lblPenaltyType").empty().html(responseData.type);
+                        $("#lblPenaltyFrequency").empty().html(responseData.freq);
+                        $("#lblPenaltyFrequencyUnit").empty().html(responseData.frequnit);
                         //$("#lblDeliveryDay").html(responseData.dday);
                         //$("#lblDeliveryHour").html(responseData.dhour);
                         //$("#lblDeliveryMinute").html(responseData.dmin);
                         //$("#lblPenaltyLimit").html(responseData.plimit);
                         //$("#lblPenaltyvalue").html(responseData.pvalue);
-                        $("#lblValidityStart").html(new Date(responseData.pstartval).getDate());
+                        $("#lblValidityStart").empty().html(new Date(responseData.pstartval).toString());
                         //$("#lblValidityEnd").html(responseData.pendtval);
 
-                        //tableShow.clear();
-                        //tableShow.rows.add(responseData).draw();
-
-                        //responseData = JSON.parse(responseData);
-                        //if (responseData.Status == "0") {
-
-                        //    $("#divAlert").addClass("alert alert-danger alert-dismissible fade show").slideDown("slow");
-                        //    $("#lblReportName").html(responseData.Message);
-                        //    return;
-                        //}
-                        //else {
-
-                        //}
+                        $('#exampleModalCenter').modal('show');
+                    
                     },
                     error: function (data) {
                         console.log(data);
                     }
                 });
-                $('#exampleModalCenter').modal('show');
             });
             
             //table.find("tbody").on('click', 'tr', function (e) {

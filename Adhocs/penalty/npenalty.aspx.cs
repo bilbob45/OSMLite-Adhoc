@@ -193,7 +193,7 @@ namespace Adhocs.penalty
         }
 
         [WebMethod]
-        public static object SavePenalty(PenaltiesModel pinfo, /*int ptype,*/ List<int> penaltyWCModel = null)
+        public static object SavePenalty(PenaltiesModel pinfo, List<int> penaltyWCModel = null)
         {
             var rowsAffected = 0;
             var response = new ResponseHandler();
@@ -299,10 +299,6 @@ namespace Adhocs.penalty
                     response.Status = rowsAffected;
                     response.Message = $"Penalty records '{pinfo.penalty_code}' saved successfuly.";
                     return response;
-                    //divAlert.Visible = true;
-                    //divAlert.Attributes.Add("class", "alert alert-success alert-dismissible");
-                    //lblFrmError.Text = $"Penalty records '{this.txtPenaltyCode.Value}' saved successfuly, <a href='{Request.Url.ToString()}'>add</a> new penalty";
-                    //this.btnSave.Enabled = false;
                 }
                 else
                 {
@@ -314,7 +310,6 @@ namespace Adhocs.penalty
             catch (SqlException sqlEx)
             {
                 LogUtitlity.LogToText(sqlEx.ToString());
-
                 if (sqlEx.Number == 2627)
                 {
                     response.Status = 0;
@@ -352,8 +347,8 @@ namespace Adhocs.penalty
                     (string.IsNullOrWhiteSpace(txtPenaltyDeadlineHour.Value)) ? (int?)null : Convert.ToInt32(txtPenaltyDeadlineHour.Value);
                 _penaltiesModel.delivery_deadline_min = 
                     (String.IsNullOrWhiteSpace(txtPenaltyDeadlineMinute.Value)) ? (int?)null : Convert.ToInt32(txtPenaltyDeadlineMinute.Value);
-                _penaltiesModel.min_limit_accepted = txtMinimumLimitsAccepted.Value;
-                _penaltiesModel.max_limit_accepted = txtMaximumLimitsAccepted.Value;
+                //_penaltiesModel.min_limit_accepted = txtMinimumLimitsAccepted.Value;
+                //_penaltiesModel.max_limit_accepted = txtMaximumLimitsAccepted.Value;
                 _penaltiesModel.penalty_per_unit = (cmbPenaltyPerUnit.SelectedValue.Equals("0")) ? false : true;
                 _penaltiesModel.failed_penalty_value = txtFailedPenaltyValue.Value;
                 _penaltiesModel.penalty_value = Convert.ToDecimal(txtPenaltyValue.Value);

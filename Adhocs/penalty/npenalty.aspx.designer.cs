@@ -111,25 +111,7 @@ namespace Adhocs.penalty
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPenaltyFreqUnit;
-
-        /// <summary>
-        /// txtPenaltyDeadlineDay control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPenaltyDeadlineDay;
-
-        /// <summary>
-        /// txtPenaltyDeadlineHour control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPenaltyDeadlineHour;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPenaltyFreqUnit;
 
         /// <summary>
         /// txtMinimumLimitsAccepted control.
@@ -150,6 +132,33 @@ namespace Adhocs.penalty
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtMaximumLimitsAccepted;
 
         /// <summary>
+        /// txtPenaltyDeadlineDay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPenaltyDeadlineDay;
+
+        /// <summary>
+        /// txtPenaltyDeadlineHour control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPenaltyDeadlineHour;
+
+        /// <summary>
+        /// txtPenaltyDeadlineMinute control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPenaltyDeadlineMinute;
+
+        /// <summary>
         /// cmbPenaltyPerUnit control.
         /// </summary>
         /// <remarks>
@@ -166,15 +175,6 @@ namespace Adhocs.penalty
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtFailedPenaltyValue;
-
-        /// <summary>
-        /// txtPenaltyDeadlineMinute control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPenaltyDeadlineMinute;
 
         /// <summary>
         /// txtPenaltyValue control.

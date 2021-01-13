@@ -230,6 +230,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\app.js" />
     <Content Include="assets\bootstrap.min.css" />
     <Content Include="assets\codemirror.min.css" />
     <Content Include="assets\codemirror.min.js" />

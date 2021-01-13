@@ -14,38 +14,6 @@
     <link href="../assets/select2/css/select2.min.css" rel="stylesheet" />
 
     <script type="text/javascript">
-        // Restricts input for the set of matched elements to the given inputFilter function.
-        (function ($) {
-            $.fn.inputFilter = function (inputFilter) {
-                return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
-                    if (inputFilter(this.value)) {
-                        this.oldValue = this.value;
-                        this.oldSelectionStart = this.selectionStart;
-                        this.oldSelectionEnd = this.selectionEnd;
-                    } else if (this.hasOwnProperty("oldValue")) {
-                        this.value = this.oldValue;
-                        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-                    } else {
-                        this.value = "";
-                    }
-                });
-            };
-        }(jQuery));
-
-        $(document).ready(function () {
-            $("#txtMinimumLimitsAccepted").inputFilter(function (value) {
-                return /^\d*$/.test(value);
-            });
-            $("#txtMaximumLimitsAccepted").inputFilter(function (value) {
-                return /^\d*$/.test(value);
-            });
-            $("#txtPenaltyPerUnit").inputFilter(function (value) {
-                return /^\d*$/.test(value);
-            });
-            $("#txtFailedPenaltyValue").inputFilter(function (value) {
-                return /^\d*$/.test(value);
-            });
-        });
 
         //Select 2 initializer
         $(document).ready(function (e) {
@@ -108,7 +76,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="cmbRiType">Institution Type <label style="color:red">*</label> </label>
-                    <asp:DropDownList CssClass="form-control" ID="cmbRiType" runat="server" AutoPostBack="True" 
+                    <asp:DropDownList CssClass="form-control" ID="cmbRiType" runat="server" AutoPostBack="False" 
                         OnSelectedIndexChanged="cmbRiType_SelectedIndexChanged" SelectMethod="GetRITypes" DataValueField="ri_type_id" DataTextField="description"></asp:DropDownList>
                 </div>
                      <div class="form-group col-md-3">
@@ -130,26 +98,30 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="txtPenaltyFreqUnit">Penalty Frequency Unit <label style="color:red">*</label> </label>
-                    <input type="text" id="txtPenaltyFreqUnit" runat="server" required="required" placeholder="Penalty Frequency Unit" class="form-control" />
+                    <input type="number" id="txtPenaltyFreqUnit" runat="server" required="required" placeholder="Penalty Frequency Unit" class="form-control" />
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="txtPenaltyDeadlineDay">Delivery Deadline Day</label>
-                    <input type="text" id="txtPenaltyDeadlineDay" runat="server" placeholder="Deadline unit" class="form-control" />
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="txtPenaltyDeadlineHour">Delivery Deadline Hour</label>
-                    <input type="text" id="txtPenaltyDeadlineHour" runat="server" placeholder="Deadline hour" class="form-control" />
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-3">
+                    <div class="form-group col-md-3">
                     <label for="txtMinimumLimitsAccepted">Min. Accepted Limits</label>
                     <input type="text" id="txtMinimumLimitsAccepted" runat="server" placeholder="Min accepted limits" class="form-control numeric" />
                 </div>
                 <div class="form-group col-md-3">
                     <label for="txtMaximumLimitsAccepted">Max. Accepted Limits</label>
                     <input type="text" id="txtMaximumLimitsAccepted" runat="server" placeholder="Max accepted limits" class="form-control numeric" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="txtPenaltyDeadlineDay">Delivery Deadline Day</label>
+                    <input type="number" id="txtPenaltyDeadlineDay" runat="server" placeholder="Deadline unit" class="form-control" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="txtPenaltyDeadlineHour">Delivery Deadline Hour</label>
+                    <input type="number" id="txtPenaltyDeadlineHour" runat="server" placeholder="Deadline hour" class="form-control" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="txtPenaltyDeadlineMinute">Delivery Deadline Minute</label>
+                    <input type="number" id="txtPenaltyDeadlineMinute" runat="server" placeholder="Deadline minute" class="form-control" />
                 </div>
                 <div class="form-group col-md-3">
                     <label for="cmbPenaltyPerUnit">Penalty Per Unit</label><label style="color:red">*</label>
@@ -158,35 +130,34 @@
                         <asp:ListItem Text="1" Value="1" Enabled="true"> </asp:ListItem>
                     </asp:DropDownList>
                 </div>
+            </div>
+
+            <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="txtFailedPenaltyValue">Failed Penalty Value</label>
                     <input type="text" id="txtFailedPenaltyValue" runat="server" placeholder="Failed penalty value" class="form-control numeric" />
                 </div>
+                <div class="form-group col-md-3">
+                    <label for="txtPenaltyValue">Penalty Value
+                        <label style="color: red">*</label></label>
+                    <input type="text" id="txtPenaltyValue" runat="server" required="required" placeholder="Penalty Value" class="form-control" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="txtStartValDate">Start Validity Date
+                        <label style="color: red">*</label></label>
+                    <div id="datetimepickerStart" class="input-append date">
+                        <input type="date" required="required" name="txtStartValDate" id="txtStartValDate" class="form-control form-control-inline input-medium date-picker" value="" />
+                        <span class="add-on">
+                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="cmbFrequency">Frequency<label style="color: red">*</label>
+                    </label>
+                    <asp:DropDownList CssClass="form-control" ID="cmbFrequency" runat="server" AutoPostBack="False" SelectMethod="GetFrequencies" DataValueField="freq_unit" DataTextField="freq_desc"></asp:DropDownList>
+                </div>
             </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="txtPenaltyDeadlineMinute">Delivery Deadline Minute</label>
-                        <input type="text" id="txtPenaltyDeadlineMinute" runat="server" placeholder="Deadline minute" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="txtPenaltyValue">Penalty Value <label style="color:red">*</label></label>
-                        <input type="text" id="txtPenaltyValue" runat="server" required="required" placeholder="Penalty Value" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="txtStartValDate">Start Validity Date <label style="color:red">*</label></label>
-                        <div id="datetimepickerStart" class="input-append date">
-                            <input type="date" required="required" name="txtStartValDate" id="txtStartValDate" class="form-control form-control-inline input-medium date-picker" value="" />
-                            <span class="add-on">
-                                <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                    <label for="txtPenaltyFreqUnit">Frequency<label style="color:red">*</label> </label>
-                    <asp:DropDownList CssClass="form-control" ID="cmbFrequency" runat="server" AutoPostBack="False" SelectMethod="GetFrequencies" DataValueField="freq_unit" DataTextField="freq_desc"> </asp:DropDownList>
-                </div>
-                </div>
 
                 <div class="form-row" style="display:none">
                     <div class="form-group col-md-3">
@@ -203,7 +174,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <div class="float-right">
-                            <asp:Button runat="server" ID="btnSave" Text="Save Penalty" CssClass="btn btn-primary" />
+                            <asp:Button runat="server" ID="btnSave" Text="Save Penalty" CssClass="btn btn-primary btn-lg" />
                         </div>
                     </div>
                 </div>
@@ -324,6 +295,12 @@
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(data),
+                beforeSend: function () {
+                    $("#btnSave").attr('disabled', true);
+                },
+                complete: function () {
+                    $("#btnSave").attr('disabled', false);
+                },
                 success: function (response) {
 
                     var responseData = (response.d !== null || response.d !== undefined) ? response.d : response;
