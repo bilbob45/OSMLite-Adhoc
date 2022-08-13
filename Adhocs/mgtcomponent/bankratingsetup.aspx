@@ -54,34 +54,34 @@
             </div>
         </div>
         <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="txtBankRatingCode">Bank Rating Code</label>
                     <input type="text" id="txtBankRatingCode" runat="server" onserverchange="txtBankRatingCode_ServerChange" required="required" placeholder="Bank rating code" class="form-control" />
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="cmbRiType">RI Type</label>
                     <asp:DropDownList CssClass="form-control" ID="cmbRiType" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbRiType_SelectedIndexChanged">
                     </asp:DropDownList>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="txtParam">Parameter</label>
                     <input type="text" id="txtParam" runat="server" required="required" placeholder="Parameter" class="form-control" />
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="txtDescription">Component</label> <!--formally Description-->
-                    <input type="text" id="txtDescription" runat="server" placeholder="Component" class="form-control" />
-                </div>
             </div>
         <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="txtComponentWeight">Component Weight</label>
                         <input type="text" id="txtComponentWeight" runat="server" required="required" placeholder="Component weight" class="form-control" />
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="txtStartValidityDate">Start Validity Date</label>
                         <asp:TextBox ID="txtStartValidityDate" OnTextChanged="txtStartValidityDate_TextChanged" CssClass="form-control form-control-inline input-medium date-picker" runat="server" TextMode="Date"></asp:TextBox>
                     </div>
-                    <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+                    <label for="txtDescription">Component</label> <!--formally Description-->
+                    <input type="text" id="txtDescription" runat="server" placeholder="Component" class="form-control" />
+                </div>
+                    <div class="form-group col-md-4" style="display:none">
                         <label for="txtEndValidityDate">End Validity Date</label>
                         <asp:TextBox ID="txtEndValidityDate" OnTextChanged="txtEndValidityDate_TextChanged" CssClass="form-control form-control-inline input-medium" runat="server" TextMode="Date" ReadOnly="true"></asp:TextBox>
                     </div>

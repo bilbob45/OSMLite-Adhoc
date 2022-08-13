@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link href="../assets/style/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/style/bootstrap.min.css" rel="stylesheet" media=""/>
     <script src="../assets/script/jquery-2.2.4.min.js"></script>
     <script src="../assets/script/bootstrap.bundle.min.js"></script>
 

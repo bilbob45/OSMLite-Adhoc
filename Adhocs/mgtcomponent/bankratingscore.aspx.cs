@@ -226,20 +226,53 @@ namespace Adhocs.mgtcomponent
         {
             gridviewrow.Cells[cellindex].Text = value;
         }
-
         private void ValidateBusinessData()
         {
             divAlert.Visible = true;
-            if (this.cmbRiType.SelectedValue.Equals("-choose one-"))
+            if (this.cmbRiType.SelectedItem.Text.Equals("-choose one-"))
+            {
                 lblError.Text = "Please select a valid RI Type";
-            else
-                divAlert.Visible = false;
-
-            if (this.cmbReportingInstitution.SelectedValue.Equals("-Select Institution-"))
+                return;
+            }
+            else if (this.cmbReportingInstitution.SelectedItem.Text.Equals("-Select Institution-"))
+            {
                 lblError.Text = "Please select a valid reporting institution";
+                return;
+            }
             else
                 divAlert.Visible = false;
 
+            string selectedDateTsring = this.txtWorkcollectionDate.Text.Trim();
+            bool isDateValid = ValidateDate(selectedDateTsring);
+            divAlert.Visible = true;
+            if (isDateValid == true)
+            { divAlert.Visible = false; }
+            else
+            {
+                lblError.Text = "The selcted date is not in the right format";
+                divAlert.Visible = true;
+            }
+        }
+
+        private void ValidateBusinessDatas()
+        {
+            divAlert.Visible = true;
+            if (this.cmbRiType.SelectedItem.Text.Equals("-choose one-"))
+            {
+                lblError.Text = "Please select a valid RI Type";
+                return;
+            }
+            else
+                divAlert.Visible = false;
+
+            if (this.cmbReportingInstitution.SelectedItem.Text.Equals("-Select Institution-"))
+            {
+                lblError.Text = "Please select a valid reporting institution";
+                return;
+            }
+            else
+                divAlert.Visible = false;
+                       
             string selectedDateTsring = this.txtWorkcollectionDate.Text.Trim();
             bool isDateValid = ValidateDate(selectedDateTsring);
             divAlert.Visible = true;

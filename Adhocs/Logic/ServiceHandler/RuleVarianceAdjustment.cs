@@ -74,6 +74,8 @@ namespace Adhocs.Logic.ServiceHandler
             try
             {
                 var sqlWhiteList = @"SELECT DISTINCT a.ri_type_id, a.ri_type_code, a.description FROM t_core_ri_type a inner join t_rpt_computation_rule_var c ON a.ri_type_id = c.ri_type_id";
+                sqlWhiteList = "select * from [dbo].[fn_rtn_ri_type_computation_rule_adjustment] ('20191231')";
+
                 using (SqlCommand cmd = new SqlCommand(sqlWhiteList, DatabaseOps.OpenSqlConnection()))
                 {
                     cmd.CommandType = CommandType.Text;
@@ -81,7 +83,7 @@ namespace Adhocs.Logic.ServiceHandler
 
                     foreach (DataRow row in _resultTable.Rows)
                     {
-                        ddplist.Items.Add(new ListItem($"{row["ri_type_code"].ToString()} - {row["description"].ToString()}", row["ri_type_id"].ToString(), true));
+                        ddplist.Items.Add(new ListItem($"{row["ri_type_code"].ToString()} - {row["ri_type_name"].ToString()}", row["ri_type_id"].ToString(), true));
                     }
                 }
             }

@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Adhocs.mgtcomponent {
-    
-    
-    public partial class bankratingsetup {
-        
+namespace Adhocs.mgtcomponent
+{
+
+
+    public partial class bankratingsetup
+    {
+
         /// <summary>
         /// frmBankRating control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Adhocs.mgtcomponent {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm frmBankRating;
-        
+
         /// <summary>
         /// divAlert control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Adhocs.mgtcomponent {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAlert;
-        
+
         /// <summary>
         /// lblError control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Adhocs.mgtcomponent {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
+
         /// <summary>
         /// txtBankRatingCode control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Adhocs.mgtcomponent {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtBankRatingCode;
-        
+
         /// <summary>
         /// cmbRiType control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Adhocs.mgtcomponent {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbRiType;
-        
+
         /// <summary>
         /// txtParam control.
         /// </summary>
@@ -65,16 +67,7 @@ namespace Adhocs.mgtcomponent {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtParam;
-        
-        /// <summary>
-        /// txtDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDescription;
-        
+
         /// <summary>
         /// txtComponentWeight control.
         /// </summary>
@@ -83,7 +76,7 @@ namespace Adhocs.mgtcomponent {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtComponentWeight;
-        
+
         /// <summary>
         /// txtStartValidityDate control.
         /// </summary>
@@ -92,7 +85,16 @@ namespace Adhocs.mgtcomponent {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStartValidityDate;
-        
+
+        /// <summary>
+        /// txtDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDescription;
+
         /// <summary>
         /// txtEndValidityDate control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace Adhocs.mgtcomponent {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEndValidityDate;
-        
+
         /// <summary>
         /// btnSave control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace Adhocs.mgtcomponent {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
-        
+
         /// <summary>
         /// btnGoBacks control.
         /// </summary>
